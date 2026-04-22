@@ -1,0 +1,5228 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>"数智种田,情感定制"农业生态全链路平台</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        :root {
+            --primary-color: #2e7d32;
+            --primary-light: #4caf50;
+            --primary-dark: #1b5e20;
+            --secondary-color: #ff9800;
+            --secondary-light: #ffb74d;
+            --light-color: #f9f9f9;
+            --dark-color: #333;
+            --gray-color: #777;
+            --light-gray: #f5f5f5;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-icon {
+            color: var(--primary-color);
+            font-size: 28px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+        
+        .logo-text span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .cart-btn, .login-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--dark-color);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .cart-btn:hover, .login-btn:hover {
+            color: var(--primary-color);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 主内容区 */
+        .main-content {
+            min-height: calc(100vh - 180px);
+            padding: 30px 0;
+        }
+        
+        /* 页面标题 */
+        .page-title {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .page-title h1 {
+            font-size: 32px;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+        
+        .page-title p {
+            color: var(--gray-color);
+            font-size: 18px;
+        }
+    
+        .hero {
+            /* 使用图片背景为首选，改为工作区内的 100.png */
+            background-image: url('image/100.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(6,32,10,0.22), rgba(6,32,10,0.08));
+            z-index: 0;
+            border-radius: 12px;
+        }
+
+        /* 轻微增强对比与饱和度以减轻图像的模糊感（不会改变文本颜色） */
+        .hero { filter: contrast(1.06) saturate(1.06); }
+
+        .hero > * { position: relative; z-index: 1; }
+        
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background-color: var(--secondary-light);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        /* 功能卡片 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        /* 四个功能卡的背景变体：使用 image/ 目录内对应图片 */
+        .feature-card.bg-health,
+        .feature-card.bg-creative,
+        .feature-card.bg-cloud,
+        .feature-card.bg-ai {
+            color: white;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: none;
+        }
+
+        .feature-card.bg-health::before,
+        .feature-card.bg-creative::before,
+        .feature-card.bg-cloud::before,
+        .feature-card.bg-ai::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.22));
+            z-index: 0;
+            border-radius: 12px;
+        }
+
+        .feature-card.bg-health > *, .feature-card.bg-creative > *, .feature-card.bg-cloud > *, .feature-card.bg-ai > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-card.bg-health { background-image: url('image/健康优选_背景(1).png'); }
+        .feature-card.bg-creative { background-image: url('image/创意设计_背景(1).png'); }
+        .feature-card.bg-cloud { background-image: url('image/云耕种植体验_背景(1).png'); }
+        .feature-card.bg-ai { background-image: url('image/AI智能推荐_背景(1).png'); }
+
+        /* 覆盖：将卡片内的文字和图标设为白色，保持可读性 */
+        .feature-card.bg-health .feature-icon,
+        .feature-card.bg-creative .feature-icon,
+        .feature-card.bg-cloud .feature-icon,
+        .feature-card.bg-ai .feature-icon {
+            color: #ffffff;
+        }
+
+        .feature-card.bg-health h3,
+        .feature-card.bg-creative h3,
+        .feature-card.bg-cloud h3,
+        .feature-card.bg-ai h3 {
+            color: #ffffff;
+        }
+
+        .feature-card.bg-health p,
+        .feature-card.bg-creative p,
+        .feature-card.bg-cloud p,
+        .feature-card.bg-ai p {
+            color: rgba(255,255,255,0.92);
+        }
+        
+        /* 礼盒定制区域 */
+        .customization-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+        
+        .customization-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .customization-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--border-color);
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        .step.active .step-circle {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .step-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-color);
+        }
+        
+        .step.active .step-name {
+            color: var(--primary-color);
+        }
+        
+        .customization-content {
+            display: none;
+        }
+        
+        .customization-content.active {
+            display: block;
+        }
+        
+        .product-categories {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 12px 25px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .category-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .product-item {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            /* 保持与原来相同的卡片/图片高度，避免图片被压缩 */
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .product-item:hover {
+            background-color: #e8f5e9;
+            transform: translateY(-5px);
+        }
+        
+        .product-item.selected {
+            background-color: #c8e6c9;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .product-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        /* 隐藏产品卡片上覆盖的白色图标，使图片更干净一致 */
+        .product-item .product-icon {
+            display: none;
+        }
+
+        .product-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.12));
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .product-item > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .product-price {
+            color: inherit;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .product-origin {
+            font-size: 12px;
+            color: #ffffff; /* 产地文字改为白色 */
+            margin-top: 5px;
+        }
+        
+        .packaging-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .packaging-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid var(--border-color);
+        }
+        
+        .packaging-item:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .packaging-item.selected {
+            border-color: var(--primary-color);
+            background-color: #e8f5e9;
+        }
+        
+        .packaging-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .order-summary {
+            background-color: #f0f7f0;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .order-summary h3 {
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        .order-items {
+            margin-bottom: 15px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #ddd;
+        }
+        
+        /* 智能推荐区域 */
+        .recommendation-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+        
+        .scenario-buttons {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .scenario-btn {
+            padding: 12px 25px;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .scenario-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .recommendation-result {
+            background-color: #f0f7f0;
+            border-radius: 8px;
+            padding: 25px;
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .recommendation-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        .recommendation-boxes {
+            display: grid;
+            /* 恢复较大的卡片宽度，让推荐图片回到原始视觉比例 */
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .recommendation-box {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            padding: 20px;
+            /* 保持推荐卡片原始高度，使图片展示比例一致 */
+            min-height: 260px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .recommendation-box.bg-image {
+            position: relative;
+            color: #fff;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .recommendation-box.bg-image::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            /* 更高级的深色叠层，带一点暖色调以提升质感 */
+            background: linear-gradient(135deg, rgba(4,8,12,0.72), rgba(46,105,40,0.14));
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 8px;
+        }
+
+        .recommendation-box.bg-image::after {
+            content: '';
+            position: absolute;
+            left: -10%;
+            top: -10%;
+            right: -10%;
+            bottom: -10%;
+            background: radial-gradient(closest-side, rgba(0,0,0,0.18), rgba(0,0,0,0.45));
+            pointer-events: none;
+            z-index: 0;
+            border-radius: 10px;
+            mix-blend-mode: multiply;
+        }
+
+        /* Frosted-glass 风格的文字面板，提升高级感和可读性 */
+        .recommendation-box.bg-image .recommendation-box-title {
+            /* 移除毛玻璃面板，保持简洁白色标题与细微阴影 */
+            display: block;
+            padding: 0;
+            margin-bottom: 8px;
+            background: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-radius: 0;
+            border: none;
+            color: #ffffff;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.28);
+            font-size: 18px;
+        }
+
+        .recommendation-box.bg-image .recommendation-price {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #f6c85f 0%, #f39c12 100%);
+            color: #2b2b2b;
+            box-shadow: 0 6px 18px rgba(243,156,18,0.12);
+            margin-top: 8px;
+        }
+
+        .recommendation-box.bg-image .recommendation-box-icon {
+            color: #ffd98a;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.35);
+            font-size: 46px;
+        }
+
+        /* 优雅的浅色按钮（在深背景上突出） */
+        .recommendation-box.bg-image .btn {
+            /* 统一为透明风格（像商务送礼那样） */
+            background: rgba(255,255,255,0.06);
+            color: #ffffff;
+            border-radius: 24px;
+            padding: 8px 16px;
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: none;
+        }
+        
+        .recommendation-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .recommendation-box-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        /* 隐藏推荐卡片上的装饰图标（白色图案） */
+        .recommendation-box .recommendation-box-icon {
+            display: none;
+        }
+        
+        .recommendation-box-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .recommendation-box > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .recommendation-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: inherit;
+            margin-bottom: 10px;
+        }
+        
+        /* 供应商后台样式 */
+        .supplier-dashboard {
+            display: flex;
+            min-height: 600px;
+            gap: 30px;
+        }
+        
+        .supplier-sidebar {
+            width: 250px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 20px;
+            height: fit-content;
+        }
+        
+        .supplier-profile {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+        
+        .supplier-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 32px;
+            color: var(--primary-color);
+        }
+        
+        .supplier-profile h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: var(--primary-dark);
+        }
+        
+        .supplier-profile p {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+        
+        .supplier-status {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: #e8f5e9;
+            color: var(--primary-color);
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: var(--dark-color);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+        
+        .sidebar-nav a:hover, .sidebar-nav a.active {
+            background-color: rgba(46, 125, 50, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .sidebar-nav i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .supplier-main {
+            flex: 1;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+        }
+        
+        .supplier-tab {
+            display: none;
+        }
+        
+        .supplier-tab.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+        }
+        
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .file-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(46, 125, 50, 0.05);
+        }
+        
+        .file-upload-icon {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .file-upload-text {
+            margin-bottom: 10px;
+            color: var(--gray-color);
+        }
+        
+        .file-upload-hint {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        .uploaded-files {
+            margin-top: 20px;
+        }
+        
+        .uploaded-file {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background-color: var(--light-gray);
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .file-icon {
+            font-size: 20px;
+            color: var(--primary-color);
+        }
+        
+        .file-name {
+            font-weight: 500;
+        }
+        
+        .file-size {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+        
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-remove {
+            background: none;
+            border: none;
+            color: #f44336;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .product-card:hover {
+            box-shadow: var(--shadow);
+        }
+        
+        .product-image {
+            height: 180px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .product-video-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-content {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .product-price {
+            color: inherit;
+            font-weight: 600;
+        }
+        
+        .product-stock {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .product-desc {
+            color: var(--gray-color);
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        /* 绘画设计区域 */
+        .design-area {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .design-tools {
+            width: 300px;
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .design-canvas-container {
+            flex: 1;
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .design-canvas {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background-color: white;
+            flex: 1;
+            cursor: crosshair;
+        }
+        
+        .tool-group {
+            margin-bottom: 25px;
+        }
+        
+        .tool-group-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+        
+        .color-palette {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            color: var(--gray-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 10px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.active {
+            border-color: var(--dark-color);
+            transform: scale(1.1);
+        }
+        
+        .brush-size-options {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .brush-size {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--dark-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        
+        .brush-size.active {
+            background-color: var(--primary-color);
+        }
+        
+        .tool-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .design-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* 云耕种游戏 */
+        .farming-game {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+        
+        .game-container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .game-info {
+            width: 300px;
+        }
+        
+        .game-stats {
+            background-color: #f0f7f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: var(--gray-color);
+        }
+        
+        .stat-value {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        
+        .crop-selection {
+            margin-bottom: 20px;
+        }
+        
+        .crop-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .crop-option {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .crop-option:hover {
+            background-color: #e8f5e9;
+        }
+        
+        .crop-option.active {
+            background-color: #c8e6c9;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .crop-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        
+        .crop-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .crop-price {
+            font-size: 12px;
+            color: var(--gray-color);
+        }
+        
+        .game-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .game-field {
+            flex: 1;
+            background-color: #e8f5e9;
+            border-radius: 8px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 10px;
+            height: 500px;
+        }
+        
+        .field-plot {
+            background-color: #8bc34a;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .field-plot:hover {
+            background-color: #7cb342;
+        }
+        
+        .field-plot.planted {
+            background-color: #689f38;
+        }
+        
+        .plot-crop {
+            font-size: 24px;
+        }
+        
+        .plot-growth {
+            position: absolute;
+            bottom: 5px;
+            left: 5px;
+            right: 5px;
+            height: 4px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .growth-progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        /* 按钮样式 */
+        .btn {
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 14px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(46, 125, 50, 0.1);
+        }
+        
+        /* 隐藏/显示页面 */
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .supplier-dashboard, .design-area, .game-container {
+                flex-direction: column;
+            }
+            
+            .supplier-sidebar, .design-tools, .game-info {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 50px 20px;
+            }
+            
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .product-list, .crop-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .game-field {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(6, 1fr);
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .product-list, .crop-options, .color-palette {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .game-field {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(8, 1fr);
+                height: 350px;
+            }
+        }
+        /* 页脚样式 - 响应式、专业化 */
+        .site-footer {
+            background: linear-gradient(180deg, #062012 0%, #0b2b16 100%);
+            color: #ffffff;
+            padding: 40px 0 22px;
+            font-size: 14px;
+        }
+
+        .site-footer .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .site-footer .footer-top {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .footer-about {
+            max-width: 460px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .footer-logo .logo-icon {
+            background: #ffffff;
+            color: var(--primary-color);
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .footer-logo .logo-text { 
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .footer-logo .logo-text span { color: var(--secondary-color); }
+
+        .footer-desc {
+            color: rgba(255,255,255,0.88);
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            margin: 0;
+            border-radius: 8px;
+            color: rgba(255,255,255,0.95);
+            background: rgba(255,255,255,0.03);
+            text-decoration: none;
+            transition: var(--transition);
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        .social-icons a:hover { background: rgba(255,255,255,0.06); color: var(--secondary-light); }
+
+        .social-icons a i, .social-icons a svg { display: block; margin: auto; width: 24px; height: 24px; line-height: 1; }
+        .social-icons a i { font-size: 24px; }
+
+        .footer-links-col, .footer-contact {
+            min-width: 200px;
+        }
+
+        .footer-links-col h4, .footer-contact h4 {
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .footer-links { list-style: none; padding: 0; margin: 0; }
+
+        .footer-links li { margin-bottom: 10px; }
+
+        .footer-links a { color: rgba(255,255,255,0.86); text-decoration: none; transition: var(--transition); }
+
+        .footer-links a:hover { color: var(--secondary-light); }
+
+        .footer-contact address { color: rgba(255,255,255,0.9); font-style: normal; line-height: 1.8; }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 16px;
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            gap: 12px;
+        }
+
+        @media (max-width: 900px) {
+            .site-footer .footer-top { flex-direction: column; gap: 18px; }
+            .footer-bottom { flex-direction: column; text-align: center; }
+            .footer-about { max-width: 100%; }
+        }
+
+        /* 数据分析页面样式 */
+        .analytics-container {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+
+        .analytics-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 10px;
+        }
+
+        .analytics-tab {
+            padding: 12px 24px;
+            border: none;
+            background: var(--light-gray);
+            color: var(--gray-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .analytics-tab:hover {
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .analytics-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .analytics-content {
+            min-height: 600px;
+        }
+
+        .analytics-panel {
+            display: none;
+        }
+
+        .analytics-panel.active {
+            display: block;
+        }
+
+        .analytics-header {
+            margin-bottom: 20px;
+        }
+
+        .analytics-header h3 {
+            color: var(--primary-dark);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .analytics-header p {
+            color: var(--gray-color);
+            font-size: 16px;
+        }
+
+        .analytics-chart {
+            background: var(--light-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .analytics-chart img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .analytics-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .analytics-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            color: var(--gray-color);
+        }
+
+        .analytics-loading i {
+            font-size: 48px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .analytics-container {
+                padding: 20px;
+            }
+
+            .analytics-tabs {
+                flex-direction: column;
+            }
+
+            .analytics-actions {
+                flex-direction: column;
+            }
+
+            .analytics-chart {
+                min-height: 300px;
+            }
+        }
+
+        /* 认证模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--primary-dark);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray-color);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .auth-section {
+            display: none;
+        }
+
+        .auth-section.active {
+            display: block;
+        }
+
+        .role-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .role-option {
+            padding: 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .role-option:hover {
+            border-color: var(--primary-color);
+            background-color: var(--light-color);
+        }
+
+        .role-option.selected {
+            border-color: var(--primary-color);
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        .role-option i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .role-option h4 {
+            margin: 10px 0;
+            color: var(--primary-dark);
+        }
+
+        .role-option p {
+            margin: 0;
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* 管理者界面样式 */
+        .manager-dashboard {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-color);
+            z-index: 9999;
+        }
+
+        .manager-dashboard.active {
+            display: block;
+        }
+
+        .manager-header {
+            background: white;
+            padding: 20px 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .manager-header h1 {
+            color: var(--primary-dark);
+            margin: 0;
+        }
+
+        .logout-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .manager-content {
+            display: flex;
+            height: calc(100vh - 80px);
+        }
+
+        .manager-sidebar {
+            width: 250px;
+            background: white;
+            box-shadow: var(--shadow);
+            padding: 20px 0;
+        }
+
+        .sidebar-menu {
+            padding: 0 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            margin-bottom: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            color: var(--gray-color);
+        }
+
+        .menu-item:hover {
+            background-color: var(--light-color);
+            color: var(--primary-color);
+        }
+
+        .menu-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .menu-item i {
+            width: 20px;
+        }
+
+        .manager-main {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .manager-tab {
+            display: none;
+        }
+
+        .manager-tab.active {
+            display: block;
+        }
+
+        /* 概览卡片样式 */
+        .overview-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .overview-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .card-content h3 {
+            margin: 0 0 5px 0;
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+
+        .card-number {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        /* 图表容器样式 */
+        .overview-charts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .chart-container h3 {
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+        }
+
+        .chart-container canvas {
+            max-width: 100%;
+            height: 300px;
+        }
+
+        /* 数据表格样式 */
+        .data-table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h3 {
+            margin: 0;
+            color: var(--primary-dark);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background-color: var(--light-color);
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        .data-table tbody tr:hover {
+            background-color: var(--light-color);
+        }
+
+        .data-table .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        .action-btn.edit {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .action-btn.delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* 状态标签样式 */
+        .status-已完成 {
+            color: #28a745;
+            font-weight: 500;
+        }
+
+        .status-进行中 {
+            color: #ffc107;
+            font-weight: 500;
+        }
+
+        .status-待发货 {
+            color: #dc3545;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .manager-content {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .manager-sidebar {
+                width: 100%;
+                padding: 10px 0;
+            }
+
+            .sidebar-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 0 10px;
+            }
+
+            .menu-item {
+                flex-shrink: 0;
+                padding: 10px 15px;
+            }
+
+            .manager-main {
+                padding: 20px;
+            }
+
+            .overview-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-charts {
+                grid-template-columns: 1fr;
+            }
+
+            .role-options {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="logo-text">盒心<span>农意</span></div>
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">首页</a></li>
+                    <li><a href="#customize">礼盒定制</a></li>
+                    <li><a href="#recommend">智能推荐</a></li>
+                    <li><a href="#supplier">供应商入口</a></li>
+                    <li><a href="#design">绘画设计</a></li>
+                    <li><a href="#game">云耕种</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button class="cart-btn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </button>
+                <button class="auth-btn" onclick="showAuthModal()">
+                    <i class="fas fa-user"></i>
+                    <span>登录/注册</span>
+                </button>
+            </div>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 首页 -->
+            <section id="home" class="page-section active">
+                <div class="hero">
+                    <h2>健康+文化+科技，打造专属农产品礼盒</h2>
+                    <p>精选优质农产品，结合传统文化与现代设计，为您的每个重要时刻定制专属心意</p>
+                    <button class="cta-button" onclick="switchPage('customize')">
+                        <i class="fas fa-palette"></i> 开始定制礼盒
+                    </button>
+                </div>
+                
+                <div class="features">
+                    <div class="feature-card bg-health">
+                        <div class="feature-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <h3>健康优选</h3>
+                        <p>精选绿色有机农产品，确保从田间到餐桌的健康安全，让每一份礼物都传递健康理念。</p>
+                    </div>
+                    
+                    <div class="feature-card bg-creative">
+                        <div class="feature-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>创意设计</h3>
+                        <p>提供绘画设计工具，让消费者亲手设计礼盒包装，打造独一无二的个性化礼盒。</p>
+                    </div>
+                    
+                    <div class="feature-card bg-cloud">
+                        <div class="feature-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>云耕种体验</h3>
+                        <p>体验虚拟种植乐趣，了解农产品生长过程，收获的作物可兑换真实农产品礼盒。</p>
+                    </div>
+                    
+                    <div class="feature-card bg-ai">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI智能推荐</h3>
+                        <p>基于用户喜好和使用场景，智能推荐最合适的农产品礼盒组合，送礼更贴心。</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 礼盒定制页面 -->
+            <section id="customize" class="page-section">
+                <div class="page-title">
+                    <h1>礼盒定制</h1>
+                    <p>选择农产品，设计包装，打造您的专属礼盒</p>
+                </div>
+                
+                <div class="customization-section">
+                    <div class="customization-steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-circle">1</div>
+                            <div class="step-name">选择产品</div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-circle">2</div>
+                            <div class="step-name">选择包装</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-circle">3</div>
+                            <div class="step-name">确认订单</div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第一步：选择产品 -->
+                    <div id="step-1" class="customization-content active">
+                        <h3>选择礼盒内容</h3>
+                        <p>请选择您想要放入礼盒的农产品（可多选）</p>
+                        
+                        <div class="product-categories">
+                            <button class="category-btn active" data-category="all">全部</button>
+                            <button class="category-btn" data-category="fruit">水果类</button>
+                            <button class="category-btn" data-category="nut">坚果类</button>
+                            <button class="category-btn" data-category="tea">茶叶类</button>
+                            <button class="category-btn" data-category="grain">五谷杂粮</button>
+                        </div>
+                        
+                        <div class="products-grid">
+                            <!-- 产品将通过JavaScript动态添加 -->
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button class="btn btn-primary" onclick="nextStep(2)">下一步：选择包装</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 第二步：选择包装 -->
+                    <div id="step-2" class="customization-content">
+                        <h3>选择礼盒包装</h3>
+                        <p>选择适合您礼盒的包装风格</p>
+                        
+                        <div class="packaging-options">
+                            <div class="packaging-item" data-packaging="traditional">
+                                <div class="packaging-icon">
+                                    <i class="fas fa-dragon"></i>
+                                </div>
+                                <div class="product-name">传统中式风格</div>
+                                <div class="product-price">+¥25</div>
+                                <div class="product-origin">红色礼盒，传统纹样</div>
+                            </div>
+                            
+                            <div class="packaging-item" data-packaging="modern">
+                                <div class="packaging-icon">
+                                    <i class="fas fa-city"></i>
+                                </div>
+                                <div class="product-name">现代简约风格</div>
+                                <div class="product-price">+¥20</div>
+                                <div class="product-origin">简约设计，环保材质</div>
+                            </div>
+                            
+                            <div class="packaging-item" data-packaging="festival">
+                                <div class="packaging-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="product-name">节日主题风格</div>
+                                <div class="product-price">+¥30</div>
+                                <div class="product-origin">节日元素，喜庆包装</div>
+                            </div>
+                            
+                            <div class="packaging-item" data-packaging="luxury">
+                                <div class="packaging-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="product-name">高端奢华风格</div>
+                                <div class="product-price">+¥50</div>
+                                <div class="product-origin">高档材质，精致工艺</div>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button class="btn btn-secondary" onclick="prevStep(1)">上一步</button>
+                            <button class="btn btn-primary" onclick="nextStep(3)">下一步：确认订单</button>
+                        </div>
+                    </div>
+                    
+                    <!-- 第三步：确认订单 -->
+                    <div id="step-3" class="customization-content">
+                        <h3>确认订单信息</h3>
+                        <p>请检查您的定制礼盒信息并确认订单</p>
+                        
+                        <div class="order-summary">
+                            <h3>订单摘要</h3>
+                            <div class="order-items" id="order-items">
+                                <!-- 订单内容将通过JavaScript动态生成 -->
+                            </div>
+                            <div class="order-total">
+                                <span>总计：</span>
+                                <span id="order-total">¥0</span>
+                            </div>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button class="btn btn-secondary" onclick="prevStep(2)">上一步</button>
+                            <button class="btn btn-primary" onclick="submitOrder()">提交订单</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 智能推荐页面 -->
+            <section id="recommend" class="page-section">
+                <div class="page-title">
+                    <h1>智能推荐</h1>
+                    <p>根据您的使用场景和需求，为您推荐最合适的礼盒搭配</p>
+                </div>
+                
+                <div class="recommendation-section">
+                    <div class="scenario-buttons">
+                        <button class="scenario-btn active" data-scenario="business">
+                            <i class="fas fa-briefcase"></i> 商务送礼
+                        </button>
+                        <button class="scenario-btn" data-scenario="festival">
+                            <i class="fas fa-holiday"></i> 节日送礼
+                        </button>
+                        <button class="scenario-btn" data-scenario="wedding">
+                            <i class="fas fa-ring"></i> 婚礼送礼
+                        </button>
+                        <button class="scenario-btn" data-scenario="health">
+                            <i class="fas fa-heartbeat"></i> 健康关怀
+                        </button>
+                        <button class="scenario-btn" data-scenario="family">
+                            <i class="fas fa-home"></i> 家庭聚会
+                        </button>
+                    </div>
+                    
+                    <div class="recommendation-result">
+                        <h3 class="recommendation-title" id="recommendation-title">商务送礼推荐</h3>
+                        <p id="recommendation-desc">针对商务场合，我们推荐选择高品质、有档次感的农产品组合，如有机茶叶、精选坚果和优质水果。包装设计应体现专业和品味，可添加企业标识提升品牌形象。</p>
+                        
+                        <div class="recommendation-boxes" id="recommendation-boxes">
+                            <!-- 推荐礼盒将通过JavaScript动态生成 -->
+                        </div>
+                        
+                        <div style="margin-top: 20px; text-align: center;">
+                            <button class="btn btn-primary" onclick="useRecommendation()">使用此推荐方案</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 供应商入口 -->
+            <section id="supplier" class="page-section">
+                <div class="page-title">
+                    <h1>供应商管理中心</h1>
+                    <p>农户可以在这里上传和管理产品信息、图片和视频</p>
+                </div>
+                
+                <div class="supplier-dashboard">
+                    <div class="supplier-sidebar">
+                        <div class="supplier-profile">
+                            <div class="supplier-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <h3>绿源农产品合作社</h3>
+                            <p>合作供应商 ID: GY00123</p>
+                            <div class="supplier-status">认证供应商</div>
+                        </div>
+                        
+                        <ul class="sidebar-nav">
+                            <li>
+                                <a href="#" class="active" onclick="switchSupplierTab('dashboard')">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    仪表盘
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="switchSupplierTab('upload')">
+                                    <i class="fas fa-upload"></i>
+                                    上传新产品
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="switchSupplierTab('products')">
+                                    <i class="fas fa-box-open"></i>
+                                    产品管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="switchSupplierTab('orders')">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    订单管理
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="switchSupplierTab('analytics')">
+                                    <i class="fas fa-chart-line"></i>
+                                    数据分析
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" onclick="switchSupplierTab('videos')">
+                                    <i class="fas fa-video"></i>
+                                    视频管理
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="supplier-main">
+                        <!-- 供应商仪表盘 -->
+                        <div id="supplier-dashboard" class="supplier-tab active">
+                            <h2 class="section-title">供应商仪表盘</h2>
+                            <div class="dashboard-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                                <div style="background-color: #e8f5e9; padding: 20px; border-radius: 8px; text-align: center;">
+                                    <h3 style="font-size: 32px; color: var(--primary-color); margin-bottom: 10px;">12</h3>
+                                    <p style="color: var(--gray-color);">上架产品</p>
+                                </div>
+                                <div style="background-color: #fff3e0; padding: 20px; border-radius: 8px; text-align: center;">
+                                    <h3 style="font-size: 32px; color: #f57c00; margin-bottom: 10px;">156</h3>
+                                    <p style="color: var(--gray-color);">本月订单</p>
+                                </div>
+                                <div style="background-color: #e3f2fd; padding: 20px; border-radius: 8px; text-align: center;">
+                                    <h3 style="font-size: 32px; color: #1976d2; margin-bottom: 10px;">¥8,450</h3>
+                                    <p style="color: var(--gray-color);">本月收入</p>
+                                </div>
+                                <div style="background-color: #f3e5f5; padding: 20px; border-radius: 8px; text-align: center;">
+                                    <h3 style="font-size: 32px; color: #7b1fa2; margin-bottom: 10px;">4.8</h3>
+                                    <p style="color: var(--gray-color);">平均评分</p>
+                                </div>
+                            </div>
+                            
+                            <div style="background-color: #f0f7f0; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                                <h3 style="margin-bottom: 15px; color: var(--primary-dark);">快速操作</h3>
+                                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                    <button class="btn btn-primary" onclick="switchSupplierTab('upload')">
+                                        <i class="fas fa-plus"></i> 上传新产品
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="switchSupplierTab('videos')">
+                                        <i class="fas fa-video"></i> 上传种植视频
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="switchSupplierTab('orders')">
+                                        <i class="fas fa-shopping-cart"></i> 查看新订单
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <h3 style="margin-bottom: 15px; color: var(--primary-dark);">平台公告</h3>
+                            <div style="background-color: white; border: 1px solid var(--border-color); border-radius: 8px; padding: 20px;">
+                                <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">
+                                    <h4 style="color: var(--primary-color); margin-bottom: 5px;">关于提高农产品溯源视频质量的通知</h4>
+                                    <p style="color: var(--gray-color); font-size: 14px;">上传种植过程视频有助于提高消费者信任度，平台将优先推荐有高质量溯源视频的产品。</p>
+                                </div>
+                                <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">
+                                    <h4 style="color: var(--primary-color); margin-bottom: 5px;">中秋礼盒征集活动</h4>
+                                    <p style="color: var(--gray-color); font-size: 14px;">中秋礼盒产品征集开始，请供应商在8月15日前上传适合中秋送礼的农产品。</p>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--primary-color); margin-bottom: 5px;">新增视频上传功能</h4>
+                                    <p style="color: var(--gray-color); font-size: 14px;">供应商现在可以上传农产品种植、采摘过程的短视频，增强产品可信度。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 上传新产品 -->
+                        <div id="supplier-upload" class="supplier-tab">
+                            <h2 class="section-title">上传新产品</h2>
+                            
+                            <div class="upload-section">
+                                <form id="product-upload-form">
+                                    <div class="form-group">
+                                        <label for="product-name">产品名称 *</label>
+                                        <input type="text" id="product-name" class="form-control" placeholder="例如：有机阳光玫瑰葡萄" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="product-category">产品分类 *</label>
+                                        <select id="product-category" class="form-control" required>
+                                            <option value="">请选择分类</option>
+                                            <option value="fruit">水果类</option>
+                                            <option value="vegetable">蔬菜类</option>
+                                            <option value="nut">坚果类</option>
+                                            <option value="tea">茶叶类</option>
+                                            <option value="grain">五谷杂粮</option>
+                                            <option value="meat">肉类</option>
+                                            <option value="other">其他</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                        <div class="form-group">
+                                            <label for="product-price">价格 (元) *</label>
+                                            <input type="number" id="product-price" class="form-control" placeholder="例如：58" step="0.01" min="0" required>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="product-stock">库存数量 *</label>
+                                            <input type="number" id="product-stock" class="form-control" placeholder="例如：100" min="0" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="product-origin">产地信息 *</label>
+                                        <input type="text" id="product-origin" class="form-control" placeholder="例如：云南省玉溪市新平县" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="product-desc">产品描述 *</label>
+                                        <textarea id="product-desc" class="form-control" placeholder="请详细描述您的产品特色、口感、营养价值等信息..." required></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>产品图片上传 *</label>
+                                        <div class="file-upload-area" onclick="document.getElementById('image-upload').click()">
+                                            <div class="file-upload-icon">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                            </div>
+                                            <div class="file-upload-text">点击或拖拽上传产品图片</div>
+                                            <div class="file-upload-hint">支持 JPG、PNG 格式，大小不超过 5MB</div>
+                                            <input type="file" id="image-upload" accept="image/*" multiple style="display: none;" onchange="handleImageUpload(event)">
+                                        </div>
+                                        <div class="uploaded-files" id="image-preview"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>种植过程视频上传（可选）</label>
+                                        <div class="file-upload-area" onclick="document.getElementById('video-upload').click()">
+                                            <div class="file-upload-icon">
+                                                <i class="fas fa-video"></i>
+                                            </div>
+                                            <div class="file-upload-text">点击或拖拽上传种植视频</div>
+                                            <div class="file-upload-hint">支持 MP4、MOV 格式，大小不超过 100MB</div>
+                                            <input type="file" id="video-upload" accept="video/*" style="display: none;" onchange="handleVideoUpload(event)">
+                                        </div>
+                                        <div class="uploaded-files" id="video-preview"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>产品认证信息（可选）</label>
+                                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                            <label style="display: flex; align-items: center; gap: 5px;">
+                                                <input type="checkbox" id="organic-cert">
+                                                有机认证
+                                            </label>
+                                            <label style="display: flex; align-items: center; gap: 5px;">
+                                                <input type="checkbox" id="green-cert">
+                                                绿色食品认证
+                                            </label>
+                                            <label style="display: flex; align-items: center; gap: 5px;">
+                                                <input type="checkbox" id="origin-cert">
+                                                地理标志产品
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <div style="text-align: center; margin-top: 30px;">
+                                        <button type="submit" class="btn btn-primary" style="padding: 15px 40px; font-size: 16px;">
+                                            <i class="fas fa-upload"></i> 提交产品信息
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <!-- 产品管理 -->
+                        <div id="supplier-products" class="supplier-tab">
+                            <h2 class="section-title">产品管理</h2>
+                            <div style="margin-bottom: 20px;">
+                                <button class="btn btn-primary" onclick="switchSupplierTab('upload')">
+                                    <i class="fas fa-plus"></i> 添加新产品
+                                </button>
+                            </div>
+                            
+                            <div class="product-list">
+                                <!-- 产品将通过JavaScript动态添加 -->
+                            </div>
+                        </div>
+                        
+                        <!-- 视频管理 -->
+                        <div id="supplier-videos" class="supplier-tab">
+                            <h2 class="section-title">视频管理</h2>
+                            <p style="margin-bottom: 20px; color: var(--gray-color);">上传农产品种植、采摘、加工过程的视频，增强消费者信任度。</p>
+                            
+                            <div class="upload-section">
+                                <div class="form-group">
+                                    <label>上传新视频</label>
+                                    <div class="file-upload-area" onclick="document.getElementById('farm-video-upload').click()">
+                                        <div class="file-upload-icon">
+                                            <i class="fas fa-video"></i>
+                                        </div>
+                                        <div class="file-upload-text">点击上传农场实拍视频</div>
+                                        <div class="file-upload-hint">支持 MP4、MOV 格式，大小不超过 200MB</div>
+                                        <input type="file" id="farm-video-upload" accept="video/*" style="display: none;" onchange="handleFarmVideoUpload(event)">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="video-title">视频标题</label>
+                                    <input type="text" id="video-title" class="form-control" placeholder="例如：有机葡萄种植过程">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="video-desc">视频描述</label>
+                                    <textarea id="video-desc" class="form-control" placeholder="描述视频内容，例如：展示有机葡萄从开花到成熟的全程管理..."></textarea>
+                                </div>
+                                
+                                <div style="text-align: center; margin-top: 20px;">
+                                    <button class="btn btn-primary" onclick="uploadFarmVideo()">
+                                        <i class="fas fa-upload"></i> 上传农场视频
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--primary-dark);">已上传的视频</h3>
+                            <div id="farm-videos-list">
+                                <!-- 农场视频将通过JavaScript动态添加 -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 绘画设计礼盒 -->
+            <section id="design" class="page-section">
+                <div class="page-title">
+                    <h1>绘画设计礼盒</h1>
+                    <p>亲手绘制独一无二的礼盒包装，打造专属的个性化礼物</p>
+                </div>
+                
+                <div class="design-area">
+                    <div class="design-tools">
+                        <div class="tool-group">
+                            <div class="tool-group-title">画笔颜色</div>
+                            <div class="color-palette">
+                                <div class="color-option active" style="background-color: #000000;" data-color="#000000"></div>
+                                <div class="color-option" style="background-color: #ff0000;" data-color="#ff0000"></div>
+                                <div class="color-option" style="background-color: #00ff00;" data-color="#00ff00"></div>
+                                <div class="color-option" style="background-color: #0000ff;" data-color="#0000ff"></div>
+                                <div class="color-option" style="background-color: #ffff00;" data-color="#ffff00"></div>
+                                <div class="color-option" style="background-color: #ff00ff;" data-color="#ff00ff"></div>
+                                <div class="color-option" style="background-color: #00ffff;" data-color="#00ffff"></div>
+                                <div class="color-option" style="background-color: #ff9900;" data-color="#ff9900"></div>
+                                <div class="color-option" style="background-color: #996633;" data-color="#996633"></div>
+                                <div class="color-option" style="background-color: #663399;" data-color="#663399"></div>
+                                <div class="color-option" style="background-color: #ffffff; border: 1px solid #ccc;" data-color="#ffffff"></div>
+                                <div class="color-option" style="background-color: #2e7d32;" data-color="#2e7d32"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-group">
+                            <div class="tool-group-title">画笔粗细</div>
+                            <div class="brush-size-options">
+                                <div class="brush-size active" data-size="2">细</div>
+                                <div class="brush-size" data-size="5">中</div>
+                                <div class="brush-size" data-size="10">粗</div>
+                                <div class="brush-size" data-size="15">特粗</div>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-group">
+                            <div class="tool-group-title">设计工具</div>
+                            <div class="tool-buttons">
+                                <button class="btn btn-secondary" onclick="clearCanvas()">
+                                    <i class="fas fa-eraser"></i> 清除画布
+                                </button>
+                                <button class="btn btn-secondary" onclick="undoDrawing()">
+                                    <i class="fas fa-undo"></i> 撤销
+                                </button>
+                                <button class="btn btn-secondary" onclick="addText()">
+                                    <i class="fas fa-font"></i> 添加文字
+                                </button>
+                                <button class="btn btn-secondary" onclick="addSticker()">
+                                    <i class="fas fa-star"></i> 添加贴纸
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="tool-group">
+                            <div class="tool-group-title">设计模板</div>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                                <button class="btn btn-secondary" onclick="loadTemplate('festival')">
+                                    节日主题
+                                </button>
+                                <button class="btn btn-secondary" onclick="loadTemplate('business')">
+                                    商务主题
+                                </button>
+                                <button class="btn btn-secondary" onclick="loadTemplate('wedding')">
+                                    婚礼主题
+                                </button>
+                                <button class="btn btn-secondary" onclick="loadTemplate('birthday')">
+                                    生日主题
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="design-actions">
+                            <button class="btn btn-primary" onclick="saveDesign()">
+                                <i class="fas fa-save"></i> 保存设计
+                            </button>
+                            <button class="btn btn-secondary" onclick="applyDesignToGiftBox()">
+                                <i class="fas fa-gift"></i> 应用到礼盒
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="design-canvas-container">
+                        <div style="margin-bottom: 15px;">
+                            <h3 style="color: var(--primary-dark);">我的设计画布</h3>
+                            <p style="color: var(--gray-color); font-size: 14px;">在画布上绘制您的礼盒包装设计，完成后可保存并应用到礼盒</p>
+                        </div>
+                        <canvas id="design-canvas" class="design-canvas" width="800" height="500"></canvas>
+                        <div style="margin-top: 15px; font-size: 14px; color: var(--gray-color);">
+                            <i class="fas fa-lightbulb"></i> 提示：使用鼠标或触控笔在画布上绘制，右侧工具栏可调整画笔属性
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 云耕种游戏 -->
+            <section id="game" class="page-section">
+                <div class="page-title">
+                    <h1>云耕种游戏</h1>
+                    <p>体验虚拟种植乐趣，了解农产品生长过程，收获的作物可兑换真实农产品</p>
+                </div>
+                
+                <div class="farming-game">
+                    <div class="game-container">
+                        <div class="game-info">
+                            <div class="game-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">我的金币</span>
+                                    <span class="stat-value" id="game-coins">1,250</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">经验等级</span>
+                                    <span class="stat-value">Lv. 5</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">今日收获</span>
+                                    <span class="stat-value" id="today-harvest">12个</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">累计兑换</span>
+                                    <span class="stat-value">3次</span>
+                                </div>
+                            </div>
+                            
+                            <div class="crop-selection">
+                                <h3 style="margin-bottom: 10px; color: var(--primary-dark);">选择作物</h3>
+                                <div class="crop-options">
+                                    <div class="crop-option active" data-crop="strawberry">
+                                        <div class="crop-icon">🍓</div>
+                                        <div class="crop-name">草莓</div>
+                                        <div class="crop-price">100金币</div>
+                                    </div>
+                                    <div class="crop-option" data-crop="tomato">
+                                        <div class="crop-icon">🍅</div>
+                                        <div class="crop-name">番茄</div>
+                                        <div class="crop-price">80金币</div>
+                                    </div>
+                                    <div class="crop-option" data-crop="carrot">
+                                        <div class="crop-icon">🥕</div>
+                                        <div class="crop-name">胡萝卜</div>
+                                        <div class="crop-price">60金币</div>
+                                    </div>
+                                    <div class="crop-option" data-crop="corn">
+                                        <div class="crop-icon">🌽</div>
+                                        <div class="crop-name">玉米</div>
+                                        <div class="crop-price">120金币</div>
+                                    </div>
+                                    <div class="crop-option" data-crop="grape">
+                                        <div class="crop-icon">🍇</div>
+                                        <div class="crop-name">葡萄</div>
+                                        <div class="crop-price">150金币</div>
+                                    </div>
+                                    <div class="crop-option" data-crop="watermelon">
+                                        <div class="crop-icon">🍉</div>
+                                        <div class="crop-name">西瓜</div>
+                                        <div class="crop-price">200金币</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="game-actions">
+                                <button class="btn btn-primary" onclick="plantCrop()">
+                                    <i class="fas fa-seedling"></i> 种植
+                                </button>
+                                <button class="btn btn-secondary" onclick="waterCrops()">
+                                    <i class="fas fa-tint"></i> 浇水
+                                </button>
+                                <button class="btn btn-secondary" onclick="fertilizeCrops()">
+                                    <i class="fas fa-prescription-bottle"></i> 施肥
+                                </button>
+                                <button class="btn btn-secondary" onclick="harvestAll()">
+                                    <i class="fas fa-harvest"></i> 一键收获
+                                </button>
+                                <button class="btn btn-primary" onclick="redeemCrops()" style="margin-top: 10px;">
+                                    <i class="fas fa-exchange-alt"></i> 兑换实物
+                                </button>
+                            </div>
+                            
+                            <div style="margin-top: 20px; padding: 15px; background-color: #f0f7f0; border-radius: 8px;">
+                                <h4 style="margin-bottom: 10px; color: var(--primary-dark);">游戏说明</h4>
+                                <ul style="font-size: 14px; color: var(--gray-color); padding-left: 20px;">
+                                    <li>选择作物并种植在土地上</li>
+                                    <li>定期浇水施肥促进作物生长</li>
+                                    <li>作物成熟后可收获获得金币</li>
+                                    <li>积累的金币可兑换真实农产品</li>
+                                    <li>每日登录可领取额外金币奖励</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="game-field" id="game-field">
+                            <!-- 游戏地块将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 认证模态框 -->
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>登录/注册</h2>
+                <button class="modal-close" onclick="closeAuthModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="role-selection" class="auth-section active">
+                    <h3>请选择您的身份</h3>
+                    <div class="role-options">
+                        <div class="role-option" data-role="farmer">
+                            <i class="fas fa-tractor"></i>
+                            <h4>农户</h4>
+                            <p>农产品生产者</p>
+                        </div>
+                        <div class="role-option" data-role="transporter">
+                            <i class="fas fa-truck"></i>
+                            <h4>运输商</h4>
+                            <p>农产品物流服务</p>
+                        </div>
+                        <div class="role-option" data-role="buyer">
+                            <i class="fas fa-shopping-cart"></i>
+                            <h4>买者</h4>
+                            <p>农产品消费者</p>
+                        </div>
+                        <div class="role-option" data-role="manager">
+                            <i class="fas fa-user-tie"></i>
+                            <h4>管理者</h4>
+                            <p>平台管理员</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="login-form" class="auth-section">
+                    <h3>管理员登录</h3>
+                    <form onsubmit="loginAsManager(event)">
+                        <div class="form-group">
+                            <label for="username">用户名</label>
+                            <input type="text" id="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input type="password" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">登录</button>
+                        <button type="button" class="btn btn-secondary" onclick="backToRoleSelection()">返回</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 管理者界面 -->
+    <div id="manager-dashboard" class="manager-dashboard">
+        <div class="manager-header">
+            <h1>管理者控制台</h1>
+            <button class="logout-btn" onclick="logoutManager()">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+            </button>
+        </div>
+
+        <div class="manager-content">
+            <div class="manager-sidebar">
+                <div class="sidebar-menu">
+                    <div class="menu-item active" onclick="switchManagerTab('overview')">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>概览</span>
+                    </div>
+                    <div class="menu-item" onclick="switchManagerTab('analytics')">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>数据分析</span>
+                    </div>
+                    <div class="menu-item" onclick="switchManagerTab('farmers')">
+                        <i class="fas fa-users"></i>
+                        <span>农户管理</span>
+                    </div>
+                    <div class="menu-item" onclick="switchManagerTab('transport')">
+                        <i class="fas fa-truck"></i>
+                        <span>运输管理</span>
+                    </div>
+                    <div class="menu-item" onclick="switchManagerTab('orders')">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>订单管理</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="manager-main">
+                <!-- 概览页面 -->
+                <div id="manager-overview" class="manager-tab active">
+                    <div class="overview-cards">
+                        <div class="overview-card">
+                            <div class="card-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>注册农户</h3>
+                                <p class="card-number">1,250</p>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <div class="card-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>运输商</h3>
+                                <p class="card-number">85</p>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <div class="card-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>总订单</h3>
+                                <p class="card-number">3,420</p>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <div class="card-icon">
+                                <i class="fas fa-yen-sign"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>月营收</h3>
+                                <p class="card-number">¥125,000</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="overview-charts">
+                        <div class="chart-container">
+                            <h3>月度订单趋势</h3>
+                            <canvas id="orders-chart"></canvas>
+                        </div>
+                        <div class="chart-container">
+                            <h3>地区分布</h3>
+                            <canvas id="regions-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据分析页面 -->
+                <div id="manager-analytics" class="manager-tab">
+                    <div class="analytics-container">
+                        <div class="analytics-tabs">
+                            <button class="analytics-tab active" onclick="switchAnalyticsTab('farmers')">
+                                <i class="fas fa-users"></i> 农户分析
+                            </button>
+                            <button class="analytics-tab" onclick="switchAnalyticsTab('transport')">
+                                <i class="fas fa-truck"></i> 运输分析
+                            </button>
+                            <button class="analytics-tab" onclick="switchAnalyticsTab('comprehensive')">
+                                <i class="fas fa-chart-line"></i> 综合分析
+                            </button>
+                        </div>
+
+                        <div class="analytics-content">
+                            <div id="analytics-farmers" class="analytics-panel active">
+                                <div class="analytics-header">
+                                    <h3>农户数据分析</h3>
+                                    <p>展示农户分布、作物类型、质量评分等关键指标</p>
+                                </div>
+                                <div class="analytics-chart">
+                                    <img id="farmers-chart" src="" alt="农户分析图表" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow);">
+                                </div>
+                                <div class="analytics-actions">
+                                    <button class="btn btn-primary" onclick="loadAnalyticsImage('farmers')">
+                                        <i class="fas fa-sync-alt"></i> 刷新数据
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadAnalyticsImage('farmers')">
+                                        <i class="fas fa-download"></i> 下载图片
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="analytics-transport" class="analytics-panel">
+                                <div class="analytics-header">
+                                    <h3>运输数据分析</h3>
+                                    <p>展示运输路线、成本、效率等关键指标</p>
+                                </div>
+                                <div class="analytics-chart">
+                                    <img id="transport-chart" src="" alt="运输分析图表" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow);">
+                                </div>
+                                <div class="analytics-actions">
+                                    <button class="btn btn-primary" onclick="loadAnalyticsImage('transport')">
+                                        <i class="fas fa-sync-alt"></i> 刷新数据
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadAnalyticsImage('transport')">
+                                        <i class="fas fa-download"></i> 下载图片
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="analytics-comprehensive" class="analytics-panel">
+                                <div class="analytics-header">
+                                    <h3>综合数据分析</h3>
+                                    <p>展示全链路综合分析报告</p>
+                                </div>
+                                <div class="analytics-chart">
+                                    <img id="comprehensive-chart" src="" alt="综合分析图表" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: var(--shadow);">
+                                </div>
+                                <div class="analytics-actions">
+                                    <button class="btn btn-primary" onclick="loadAnalyticsImage('comprehensive')">
+                                        <i class="fas fa-sync-alt"></i> 刷新数据
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="downloadAnalyticsImage('comprehensive')">
+                                        <i class="fas fa-download"></i> 下载图片
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 农户管理页面 -->
+                <div id="manager-farmers" class="manager-tab">
+                    <div class="data-table-container">
+                        <div class="table-header">
+                            <h3>农户管理</h3>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-plus"></i> 添加农户
+                            </button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>姓名</th>
+                                    <th>地区</th>
+                                    <th>作物类型</th>
+                                    <th>种植面积</th>
+                                    <th>质量评分</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="farmers-table-body">
+                                <!-- 动态填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 运输管理页面 -->
+                <div id="manager-transport" class="manager-tab">
+                    <div class="data-table-container">
+                        <div class="table-header">
+                            <h3>运输管理</h3>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-plus"></i> 添加运输商
+                            </button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>路线</th>
+                                    <th>运输重量</th>
+                                    <th>成本</th>
+                                    <th>运输时间</th>
+                                    <th>方式</th>
+                                    <th>效率评分</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transport-table-body">
+                                <!-- 动态填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 订单管理页面 -->
+                <div id="manager-orders" class="manager-tab">
+                    <div class="data-table-container">
+                        <div class="table-header">
+                            <h3>订单管理</h3>
+                            <button class="btn btn-primary">
+                                <i class="fas fa-plus"></i> 新建订单
+                            </button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>订单号</th>
+                                    <th>客户</th>
+                                    <th>产品</th>
+                                    <th>金额</th>
+                                    <th>状态</th>
+                                    <th>下单时间</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-table-body">
+                                <!-- 动态填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <div class="logo-icon"><i class="fas fa-gift"></i></div>
+                        <div class="logo-text">盒心<span>农意</span></div>
+                    </div>
+                    <p class="footer-desc">"盒心农意"是专注于农产品礼盒定制的创新平台，致力于将优质农产品与文化创意结合，为消费者提供个性化、高品质的礼盒定制服务。</p>
+                    <div class="social-icons">
+                        <a href="#" aria-label="微信"><i class="fab fa-weixin"></i></a>
+                        <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
+                        <a href="#" aria-label="抖音">
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <!-- 简洁现代的音乐符号，圆角与线条统一风格 -->
+                                <path fill="currentColor" d="M14.5 3.5c-.2 0-.4 0-.6.1l-3.7 1.4c-.6.2-1 .8-1 1.5v7.6c-.8-.4-1.7-.6-2.6-.6-2.4 0-4.4 1.9-4.4 4.3S3.4 22 5.8 22s4.4-1.9 4.4-4.3V12l3.7-1.4V7.1c0-.9.6-1.7 1.5-1.9l1.8-.6V4.1c0-.9-.6-1.6-1.5-1.6z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="小红书">
+                            <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path fill="currentColor" d="M6 2c-2.2 0-4 1.8-4 4v12c0 2.2 1.8 4 4 4h12c2.2 0 4-1.8 4-4V6c0-2.2-1.8-4-4-4H6zm2 4h8c.6 0 1 .4 1 1s-.4 1-1 1H8c-.6 0-1-.4-1-1s.4-1 1-1zm0 3h8c.6 0 1 .4 1 1s-.4 1-1 1H8c-.6 0-1-.4-1-1s.4-1 1-1zm0 3h5c.6 0 1 .4 1 1s-.4 1-1 1H8c-.6 0-1-.4-1-1s.4-1 1-1z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-links-col">
+                    <h4>快速链接</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" onclick="switchPage('home')">首页</a></li>
+                        <li><a href="#customize" onclick="switchPage('customize')">礼盒定制</a></li>
+                        <li><a href="#recommend" onclick="switchPage('recommend')">智能推荐</a></li>
+                        <li><a href="#supplier" onclick="switchPage('supplier')">供应商入口</a></li>
+                        <li><a href="#design" onclick="switchPage('design')">绘画设计</a></li>
+                        <li><a href="#contact">联系我们</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>联系我们</h4>
+                    <address>
+                        <div><i class="fas fa-map-marker-alt"></i> 山东省威海市南海新区现代路 69 号，北京交通大学威海校区</div>
+                        <div><i class="fas fa-phone"></i> <a href="tel:17604360147">17604360147</a></div>
+                        <div><i class="fas fa-envelope"></i> <a href="mailto:123456678@qq.com">123456678@qq.com</a></div>
+                    </address>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copy">&copy; 2026 盒心农意农产品礼盒定制平台. 保留所有权利.</div>
+                <div class="footer-credit">温暖农心团队</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 页面切换功能
+        function switchPage(pageId) {
+            // 隐藏所有页面
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // 显示目标页面
+            document.getElementById(pageId).classList.add('active');
+            
+            // 更新导航菜单状态
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`nav a[href="#${pageId}"]`).classList.add('active');
+            
+            // 滚动到顶部
+            window.scrollTo(0, 0);
+            
+            // 如果是游戏页面，初始化游戏
+            if (pageId === 'game') {
+                initFarmingGame();
+            }
+            
+            // 如果是设计页面，初始化画布
+            if (pageId === 'design') {
+                initDrawingCanvas();
+            }
+            
+            // 如果是供应商页面，显示仪表盘
+            if (pageId === 'supplier') {
+                switchSupplierTab('dashboard');
+                loadSupplierProducts();
+                loadFarmVideos();
+            }
+            
+            // 如果是定制页面，初始化产品列表
+            if (pageId === 'customize') {
+                initProductList();
+                updateOrderSummary();
+            }
+            
+            // 如果是推荐页面，初始化推荐
+            if (pageId === 'recommend') {
+                updateRecommendation('business');
+            }
+            
+            // 如果是数据分析页面，初始化分析
+            if (pageId === 'analytics') {
+                switchAnalyticsTab('farmers');
+            }
+        }
+        
+        // 导航菜单点击事件
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('href').substring(1);
+                switchPage(pageId);
+            });
+        });
+        
+        // 礼盒定制功能
+        // 产品数据
+        const products = [
+            { id: 1, name: "阳光玫瑰葡萄", category: "fruit", price: 38, origin: "云南大理", icon: "fas fa-grapes" },
+            { id: 2, name: "赣南脐橙", category: "fruit", price: 32, origin: "江西赣州", icon: "fas fa-apple-alt" },
+            { id: 3, name: "车厘子", category: "fruit", price: 68, origin: "山东烟台", icon: "fas fa-cherry" },
+            { id: 4, name: "有机核桃", category: "nut", price: 18, origin: "新疆阿克苏", icon: "fas fa-seedling" },
+            { id: 5, name: "精选杏仁", category: "nut", price: 25, origin: "河北承德", icon: "fas fa-cookie-bite" },
+            { id: 6, name: "有机腰果", category: "nut", price: 31, origin: "新疆和田", icon: "fas fa-peanut" },
+            { id: 7, name: "龙井茶叶", category: "tea", price: 128, origin: "浙江杭州", icon: "fas fa-mug-hot" },
+            { id: 8, name: "铁观音茶叶", category: "tea", price: 88, origin: "福建安溪", icon: "fas fa-coffee" },
+            { id: 9, name: "云南普洱茶", category: "tea", price: 158, origin: "云南西双版纳", icon: "fas fa-wine-bottle" },
+            { id: 10, name: "有机糙米", category: "grain", price: 18, origin: "黑龙江", icon: "fas fa-bread-slice" },
+            { id: 11, name: "五谷杂粮", category: "grain", price: 25, origin: "内蒙古", icon: "fas fa-wheat" },
+            { id: 12, name: "有机燕麦", category: "grain", price: 26, origin: "河北张家口", icon: "fas fa-seedling" }
+        ];
+
+        // 映射产品 id 到图片文件（image 目录下）
+        const imageMap = {
+            1: 'image/1.jpg',
+            2: 'image/2.jpg',
+            3: 'image/3.jpg',
+            4: 'image/4.jpg',
+            5: 'image/5.jpg',
+            6: 'image/6.jpg',
+            7: 'image/7.jpg',
+            8: 'image/8.jpg',
+            9: 'image/9.jpg',
+            10: 'image/10.jpg',
+            11: 'image/11.jpg',
+            12: 'image/12.png'
+        };
+        // 节日推荐专用背景图（请将你提供的三张礼盒图片放入 image/ 目录，命名如下）
+        const festivalImages = [
+            'image/festival1.jpg',
+            'image/festival2.jpg',
+            'image/festival3.jpg'
+        ];
+        // 商务推荐专用背景图（请将你提供的三张礼盒图片放入 image/ 目录，命名如下）
+        const businessImages = [
+            'image/e.jpg',
+            'image/q.jpg',
+            'image/w.jpg'
+        ];
+        // 婚礼推荐专用背景图（请将你提供的三张礼盒图片放入 image/ 目录，命名如下）
+        const weddingImages = [
+            'image/wedding1.jpg',
+            'image/wedding2.jpg',
+            'image/wedding3.jpg'
+        ];
+        // 家庭聚会专用背景图（请将你提供的三张礼盒图片放入 image/ 目录，命名如下）
+        const familyImages = [
+            'image/h.jpg',
+            'image/i.jpg',
+            'image/j.jpg'
+        ];
+        // 健康推荐专用背景图（请将你提供的三张礼盒图片放入 image/ 目录，命名如下）
+        const healthImages = [
+            'image/health1.jpg',
+            'image/health2.jpg',
+            'image/health3.jpg'
+        ];
+        
+        // 已选产品
+        let selectedProducts = [];
+        let selectedPackaging = null;
+        let packagingPrice = 0;
+        
+        // 初始化产品列表
+        function initProductList() {
+            const productsGrid = document.querySelector('.products-grid');
+            productsGrid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product-item';
+                productElement.dataset.id = product.id;
+                productElement.dataset.category = product.category;
+                
+                // 检查是否已选中
+                const isSelected = selectedProducts.includes(product.id);
+                if (isSelected) {
+                    productElement.classList.add('selected');
+                }
+
+                // 如果有映射的图片，则设置为背景图
+                const imgPath = imageMap[product.id];
+                if (imgPath) {
+                    productElement.style.backgroundImage = `url('${imgPath}')`;
+                    productElement.style.backgroundSize = 'cover';
+                    productElement.style.backgroundPosition = 'center';
+                    productElement.style.backgroundRepeat = 'no-repeat';
+                    productElement.style.backgroundColor = 'transparent';
+                }
+                
+                productElement.innerHTML = `
+                    <div class="product-icon">
+                        <i class="${product.icon}"></i>
+                    </div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">¥${product.price}</div>
+                    <div class="product-origin">${product.origin}</div>
+                `;
+                
+                productElement.addEventListener('click', () => {
+                    toggleProductSelection(product.id);
+                });
+                
+                productsGrid.appendChild(productElement);
+            });
+            
+            // 产品分类过滤
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 更新按钮状态
+                    document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const category = this.dataset.category;
+                    
+                    // 显示/隐藏产品
+                    document.querySelectorAll('.product-item').forEach(item => {
+                        if (category === 'all' || item.dataset.category === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // 包装选择
+            document.querySelectorAll('.packaging-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    // 移除其他选中状态
+                    document.querySelectorAll('.packaging-item').forEach(i => i.classList.remove('selected'));
+                    // 添加当前选中状态
+                    this.classList.add('selected');
+                    
+                    selectedPackaging = this.dataset.packaging;
+                    packagingPrice = parseInt(this.querySelector('.product-price').textContent.replace('+¥', ''));
+                    
+                    updateOrderSummary();
+                });
+            });
+        }
+        
+        // 切换产品选择状态
+        function toggleProductSelection(productId) {
+            const productElement = document.querySelector(`.product-item[data-id="${productId}"]`);
+            
+            if (selectedProducts.includes(productId)) {
+                // 取消选择
+                selectedProducts = selectedProducts.filter(id => id !== productId);
+                productElement.classList.remove('selected');
+            } else {
+                // 选择产品
+                selectedProducts.push(productId);
+                productElement.classList.add('selected');
+            }
+            
+            updateOrderSummary();
+        }
+        
+        // 定制步骤切换
+        function nextStep(step) {
+            // 更新步骤指示器
+            document.querySelectorAll('.step').forEach(s => {
+                s.classList.remove('active');
+            });
+            document.querySelector(`.step[data-step="${step}"]`).classList.add('active');
+            
+            // 显示对应步骤内容
+            document.querySelectorAll('.customization-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`step-${step}`).classList.add('active');
+            
+            // 如果是第三步，更新订单摘要
+            if (step === 3) {
+                updateOrderSummary();
+            }
+        }
+        
+        function prevStep(step) {
+            nextStep(step);
+        }
+        
+        // 更新订单摘要
+        function updateOrderSummary() {
+            const orderItems = document.getElementById('order-items');
+            let total = 0;
+            let itemsHTML = '';
+            
+            // 添加产品
+            selectedProducts.forEach(productId => {
+                const product = products.find(p => p.id === productId);
+                itemsHTML += `
+                    <div class="order-item">
+                        <span>${product.name}</span>
+                        <span>¥${product.price}</span>
+                    </div>
+                `;
+                total += product.price;
+            });
+            
+            // 添加包装
+            if (selectedPackaging) {
+                itemsHTML += `
+                    <div class="order-item">
+                        <span>${getPackagingName(selectedPackaging)}包装</span>
+                        <span>+¥${packagingPrice}</span>
+                    </div>
+                `;
+                total += packagingPrice;
+            }
+            
+            // 如果没有选择任何产品
+            if (selectedProducts.length === 0 && !selectedPackaging) {
+                itemsHTML = '<div class="order-item"><span>请先选择产品和包装</span><span></span></div>';
+            }
+            
+            orderItems.innerHTML = itemsHTML;
+            document.getElementById('order-total').textContent = `¥${total}`;
+        }
+        
+        // 获取包装名称
+        function getPackagingName(packaging) {
+            const names = {
+                'traditional': '传统中式风格',
+                'modern': '现代简约风格',
+                'festival': '节日主题风格',
+                'luxury': '高端奢华风格'
+            };
+            return names[packaging] || '包装';
+        }
+        
+        // 提交订单
+        function submitOrder() {
+            if (selectedProducts.length === 0) {
+                alert('请至少选择一种产品！');
+                return;
+            }
+            
+            if (!selectedPackaging) {
+                alert('请选择一种包装风格！');
+                return;
+            }
+            
+            const total = document.getElementById('order-total').textContent;
+            alert(`订单提交成功！总金额：${total}\n我们将在24小时内为您处理订单。`);
+            
+            // 重置选择
+            selectedProducts = [];
+            selectedPackaging = null;
+            packagingPrice = 0;
+            
+            // 重置UI
+            document.querySelectorAll('.product-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('.packaging-item.selected').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // 回到第一步
+            nextStep(1);
+            updateOrderSummary();
+        }
+        
+        // 智能推荐功能
+        const recommendations = {
+            business: {
+                title: '商务送礼推荐',
+                desc: '针对商务场合，我们推荐选择高品质、有档次感的农产品组合，如有机茶叶、精选坚果和优质水果。包装设计应体现专业和品味，可添加企业标识提升品牌形象。',
+                boxes: [
+                    {
+                        name: '商务尊享礼盒',
+                        price: 298,
+                        desc: '有机茶叶+精选坚果+新鲜水果',
+                        icon: 'fas fa-briefcase'
+                    },
+                    {
+                        name: '企业定制礼盒',
+                        price: 398,
+                        desc: '高端茶叶+有机坚果+定制包装',
+                        icon: 'fas fa-building'
+                    },
+                    {
+                        name: '合作伙伴礼盒',
+                        price: 258,
+                        desc: '优质茶叶+健康坚果组合',
+                        icon: 'fas fa-handshake'
+                    }
+                ]
+            },
+            festival: {
+                title: '节日送礼推荐',
+                desc: '传统节日送礼注重寓意和喜庆氛围。我们推荐结合节日特色的农产品组合，如中秋的月饼水果、春节的年货坚果，搭配节日主题包装设计。',
+                boxes: [
+                    {
+                        name: '中秋团圆礼盒',
+                        price: 198,
+                        desc: '月饼+时令水果+传统包装',
+                        icon: 'fas fa-moon'
+                    },
+                    {
+                        name: '春节年货礼盒',
+                        price: 228,
+                        desc: '坚果干货+传统糕点+红色包装',
+                        icon: 'fas fa-gift'
+                    },
+                    {
+                        name: '端午安康礼盒',
+                        price: 168,
+                        desc: '粽子+咸蛋+茶叶组合',
+                        icon: 'fas fa-drumstick-bite'
+                    }
+                ]
+            },
+            wedding: {
+                title: '婚礼送礼推荐',
+                desc: '婚礼场合适合赠送寓意美好、喜庆的农产品组合。推荐甜蜜水果、健康食材搭配红色喜庆包装，为新婚夫妇送上美好祝福。',
+                boxes: [
+                    {
+                        name: '新婚祝福礼盒',
+                        price: 168,
+                        desc: '甜蜜水果+健康坚果+红色包装',
+                        icon: 'fas fa-heart'
+                    },
+                    {
+                        name: '喜庆回礼礼盒',
+                        price: 128,
+                        desc: '精致点心+甜蜜糖果组合',
+                        icon: 'fas fa-ring'
+                    },
+                    {
+                        name: '永结同心礼盒',
+                        price: 258,
+                        desc: '高档茶叶+进口坚果组合',
+                        icon: 'fas fa-dove'
+                    }
+                ]
+            },
+            health: {
+                title: '健康关怀推荐',
+                desc: '针对健康关怀需求，我们推荐有机、低糖、高营养的农产品组合，适合送给长辈或注重健康的亲友。',
+                boxes: [
+                    {
+                        name: '健康养生礼盒',
+                        price: 188,
+                        desc: '有机杂粮+低糖食品组合',
+                        icon: 'fas fa-heartbeat'
+                    },
+                    {
+                        name: '有机食品礼盒',
+                        price: 228,
+                        desc: '有机蔬菜+杂粮+食用油',
+                        icon: 'fas fa-leaf'
+                    },
+                    {
+                        name: '低糖食品礼盒',
+                        price: 198,
+                        desc: '低糖水果+无糖食品组合',
+                        icon: 'fas fa-apple-alt'
+                    }
+                ]
+            },
+            family: {
+                title: '家庭聚会推荐',
+                desc: '家庭聚会适合选择丰富多样、适合分享的农产品组合。推荐时令水果、健康零食和实用食材，满足全家人的口味。',
+                boxes: [
+                    {
+                        name: '家庭分享礼盒',
+                        price: 158,
+                        desc: '多种水果+坚果零食组合',
+                        icon: 'fas fa-home'
+                    },
+                    {
+                        name: '周末欢聚礼盒',
+                        price: 128,
+                        desc: '休闲零食+时令水果',
+                        icon: 'fas fa-utensils'
+                    },
+                    {
+                        name: '亲友聚餐礼盒',
+                        price: 198,
+                        desc: '优质食材+调味品组合',
+                        icon: 'fas fa-users'
+                    }
+                ]
+            }
+        };
+        
+        // 更新推荐内容
+        function updateRecommendation(scenario) {
+            const recommendation = recommendations[scenario];
+            if (!recommendation) return;
+            
+            document.getElementById('recommendation-title').textContent = recommendation.title;
+            document.getElementById('recommendation-desc').textContent = recommendation.desc;
+            
+            const boxesContainer = document.getElementById('recommendation-boxes');
+            boxesContainer.innerHTML = '';
+            
+            recommendation.boxes.forEach(box => {
+                const boxElement = document.createElement('div');
+                boxElement.className = 'recommendation-box';
+                
+                boxElement.innerHTML = `
+                    <div class="recommendation-box-icon">
+                        <i class="${box.icon}"></i>
+                    </div>
+                    <h4 class="recommendation-box-title">${box.name}</h4>
+                    <p style="font-size: 14px; color: var(--gray-color); margin-bottom: 10px;">${box.desc}</p>
+                    <div class="recommendation-price">¥${box.price}</div>
+                    <button class="btn btn-secondary" style="width: 100%;" onclick="selectRecommendedBox('${scenario}', '${box.name}')">选择此礼盒</button>
+                `;
+                
+                // 如果是节日场景，尝试为每个推荐礼盒设置背景图（按顺序使用 festivalImages）
+                if (scenario === 'business') {
+                    try {
+                        const idx = recommendation.boxes.indexOf(box);
+                        const bg = businessImages[idx];
+                        if (bg) {
+                            boxElement.style.backgroundImage = `url('${bg}')`;
+                            boxElement.style.backgroundSize = 'cover';
+                            boxElement.style.backgroundPosition = 'center';
+                            boxElement.classList.add('bg-image');
+                            boxElement.style.color = '#fff';
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+                // 如果是商务场景，尝试为每个推荐礼盒设置背景图（按顺序使用 businessImages）
+                if (scenario === 'business') {
+                    try {
+                        const idx = recommendation.boxes.indexOf(box);
+                        const bg = businessImages[idx];
+                        if (bg) {
+                            boxElement.style.backgroundImage = `url('${bg}')`;
+                            boxElement.style.backgroundSize = 'cover';
+                            boxElement.style.backgroundPosition = 'center';
+                            boxElement.classList.add('bg-image');
+                            boxElement.style.color = '#fff';
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+
+                // 如果是家庭场景，尝试为每个推荐礼盒设置背景图（按顺序使用 familyImages）
+                if (scenario === 'family') {
+                    try {
+                        const idx = recommendation.boxes.indexOf(box);
+                        const bg = familyImages[idx];
+                        if (bg) {
+                            boxElement.style.backgroundImage = `url('${bg}')`;
+                            boxElement.style.backgroundSize = 'cover';
+                            boxElement.style.backgroundPosition = 'center';
+                            boxElement.classList.add('bg-image');
+                            boxElement.style.color = '#fff';
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+
+                // 如果是节日场景，尝试为每个推荐礼盒设置背景图（按顺序使用 festivalImages）
+                if (scenario === 'festival') {
+                    try {
+                        const idx = recommendation.boxes.indexOf(box);
+                        const bg = festivalImages[idx];
+                        if (bg) {
+                            boxElement.style.backgroundImage = `url('${bg}')`;
+                            boxElement.style.backgroundSize = 'cover';
+                            boxElement.style.backgroundPosition = 'center';
+                            boxElement.classList.add('bg-image');
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+
+                // 如果是婚礼场景，尝试为每个推荐礼盒设置背景图（按顺序使用 weddingImages）
+                if (scenario === 'wedding') {
+                    try {
+                        const idx = recommendation.boxes.indexOf(box);
+                        const bg = weddingImages[idx];
+                        if (bg) {
+                            boxElement.style.backgroundImage = `url('${bg}')`;
+                            boxElement.style.backgroundSize = 'cover';
+                            boxElement.style.backgroundPosition = 'center';
+                            boxElement.classList.add('bg-image');
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+                // 如果是健康场景，尝试为每个推荐礼盒设置背景图（按顺序使用 healthImages）
+                if (scenario === 'health') {
+                    try {
+                        const idx = recommendation.boxes.indexOf(box);
+                        const bg = healthImages[idx];
+                        if (bg) {
+                            boxElement.style.backgroundImage = `url('${bg}')`;
+                            boxElement.style.backgroundSize = 'cover';
+                            boxElement.style.backgroundPosition = 'center';
+                            boxElement.classList.add('bg-image');
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+
+                // 如果是商务场景，强制将标题、价格、图标等文字颜色设为白色，保证在深色背景或图片上可读
+                if (scenario === 'business') {
+                    try {
+                        const titleEl = boxElement.querySelector('.recommendation-box-title');
+                        if (titleEl) titleEl.style.color = '#fff';
+                        const priceEl = boxElement.querySelector('.recommendation-price');
+                        if (priceEl) priceEl.style.color = '#fff';
+                        const iconEl = boxElement.querySelector('.recommendation-box-icon');
+                        if (iconEl) iconEl.style.color = '#fff';
+                        const descEl = boxElement.querySelector('p');
+                        if (descEl) descEl.style.color = 'rgba(255,255,255,0.9)';
+                        const btn = boxElement.querySelector('.btn-secondary');
+                        if (btn) {
+                            btn.style.color = '#fff';
+                            btn.style.borderColor = 'rgba(255,255,255,0.25)';
+                            btn.style.background = 'rgba(255,255,255,0.06)';
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+                }
+
+                boxesContainer.appendChild(boxElement);
+            });
+            
+            // 更新场景按钮状态
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.scenario === scenario) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+        
+        // 选择推荐的礼盒
+        function selectRecommendedBox(scenario, boxName) {
+            alert(`已选择"${boxName}"礼盒！现在为您跳转到礼盒定制页面。`);
+            switchPage('customize');
+            
+            // 这里可以根据选择的推荐礼盒预选一些产品
+            // 例如：商务礼盒预选茶叶和坚果
+            if (scenario === 'business') {
+                selectedProducts = [7, 4]; // 龙井茶叶和有机核桃
+                selectedPackaging = 'traditional';
+                packagingPrice = 25;
+                initProductList();
+                updateOrderSummary();
+            }
+        }
+        
+        // 使用推荐方案
+        function useRecommendation() {
+            const activeScenario = document.querySelector('.scenario-btn.active').dataset.scenario;
+            alert(`将使用"${recommendations[activeScenario].title}"方案为您定制礼盒！`);
+            switchPage('customize');
+        }
+        
+        // 场景按钮点击事件
+        document.querySelectorAll('.scenario-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const scenario = this.dataset.scenario;
+                updateRecommendation(scenario);
+            });
+        });
+        
+        // 供应商功能
+        // 供应商选项卡切换
+        function switchSupplierTab(tabId) {
+            // 隐藏所有选项卡
+            document.querySelectorAll('.supplier-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示目标选项卡
+            document.getElementById(`supplier-${tabId}`).classList.add('active');
+            
+            // 更新侧边栏菜单状态
+            document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // 找到对应的侧边栏链接并激活
+            const tabMap = {
+                'dashboard': '仪表盘',
+                'upload': '上传新产品',
+                'products': '产品管理',
+                'videos': '视频管理'
+            };
+            
+            if (tabMap[tabId]) {
+                const linkText = tabMap[tabId];
+                document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                    if (link.textContent.includes(linkText)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        }
+        
+        // 供应商产品数据
+        const supplierProducts = [
+            { 
+                id: 1, 
+                name: "有机阳光玫瑰葡萄", 
+                category: "fruit", 
+                price: 58, 
+                stock: 120,
+                origin: "云南大理",
+                desc: "有机种植，无农药残留，甜度高，果粒饱满，口感清脆",
+                hasVideo: true,
+                certifications: ["organic"]
+            },
+            { 
+                id: 2, 
+                name: "赣南脐橙", 
+                category: "fruit", 
+                price: 42, 
+                stock: 200,
+                origin: "江西赣州",
+                desc: "赣南特产，果大形正，橙红鲜艳，肉质脆嫩，风味浓甜芳香",
+                hasVideo: false,
+                certifications: ["origin"]
+            },
+            { 
+                id: 3, 
+                name: "有机核桃", 
+                category: "nut", 
+                price: 38, 
+                stock: 150,
+                origin: "新疆阿克苏",
+                desc: "新疆特产，壳薄肉厚，营养丰富，富含不饱和脂肪酸",
+                hasVideo: true,
+                certifications: ["organic", "green"]
+            },
+            { 
+                id: 4, 
+                name: "龙井茶叶", 
+                category: "tea", 
+                price: 128, 
+                stock: 80,
+                origin: "浙江杭州",
+                desc: "明前龙井，茶叶扁平光滑，色泽嫩绿，香气清高，滋味甘醇",
+                hasVideo: false,
+                certifications: ["origin", "green"]
+            }
+        ];
+        
+        // 农场视频数据
+        const farmVideos = [
+            {
+                id: 1,
+                title: "有机葡萄种植全过程",
+                desc: "展示有机葡萄从开花、结果到成熟的全程管理，包括有机施肥、病虫害生物防治等",
+                date: "2023-08-15",
+                duration: "5:23"
+            },
+            {
+                id: 2,
+                title: "核桃采摘与加工",
+                desc: "记录新疆核桃的采摘、去壳、筛选和包装过程，展现传统工艺与现代技术的结合",
+                date: "2023-09-10",
+                duration: "8:45"
+            }
+        ];
+        
+        // 加载供应商产品列表
+        function loadSupplierProducts() {
+            const productList = document.querySelector('.product-list');
+            if (!productList) return;
+            
+            productList.innerHTML = '';
+            
+            supplierProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                
+                const certIcons = [];
+                if (product.certifications.includes('organic')) certIcons.push('<i class="fas fa-leaf" title="有机认证"></i>');
+                if (product.certifications.includes('green')) certIcons.push('<i class="fas fa-recycle" title="绿色食品"></i>');
+                if (product.certifications.includes('origin')) certIcons.push('<i class="fas fa-map-marker-alt" title="地理标志产品"></i>');
+                
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <div style="width: 100%; height: 100%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center; color: #777;">
+                            <i class="fas fa-carrot" style="font-size: 60px;"></i>
+                        </div>
+                        ${product.hasVideo ? '<div class="product-video-icon"><i class="fas fa-video"></i></div>' : ''}
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">${product.name}</h3>
+                        <div class="product-meta">
+                            <div class="product-price">¥${product.price}/斤</div>
+                            <div class="product-stock">库存: ${product.stock}</div>
+                        </div>
+                        <p class="product-desc">${product.desc}</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <div style="font-size: 14px; color: var(--gray-color);">产地: ${product.origin}</div>
+                            <div style="display: flex; gap: 5px;">
+                                ${certIcons.join('')}
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary" onclick="editProduct(${product.id})">
+                                <i class="fas fa-edit"></i> 编辑
+                            </button>
+                            <button class="btn btn-secondary" onclick="deleteProduct(${product.id})">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                // 尝试使用 imageMap 为产品图片区域设置背景图（若存在映射）
+                let imgPath = (typeof imageMap !== 'undefined') ? imageMap[product.id] : null;
+                // 为供应商产品做特定覆盖，不改变全局 imageMap（避免影响礼盒选择区）
+                if (product.name === '有机核桃') {
+                    imgPath = 'image/4.jpg';
+                } else if (product.name === '龙井茶叶') {
+                    imgPath = 'image/7.jpg';
+                }
+                if (imgPath) {
+                    const imgDiv = productCard.querySelector('.product-image > div');
+                    if (imgDiv) {
+                        imgDiv.style.backgroundImage = `url('${imgPath}')`;
+                        imgDiv.style.backgroundSize = 'cover';
+                        imgDiv.style.backgroundPosition = 'center';
+                        imgDiv.style.backgroundRepeat = 'no-repeat';
+                        imgDiv.style.color = 'transparent';
+                        imgDiv.innerHTML = '';
+                    }
+                }
+
+                productList.appendChild(productCard);
+            });
+        }
+        
+        // 加载农场视频列表
+        function loadFarmVideos() {
+            const videosList = document.getElementById('farm-videos-list');
+            if (!videosList) return;
+            
+            videosList.innerHTML = '';
+            
+            farmVideos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'uploaded-file';
+                videoItem.style.marginBottom = '15px';
+                
+                videoItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div>
+                            <div class="file-name">${video.title}</div>
+                            <div class="file-size">${video.duration} • 上传于 ${video.date}</div>
+                            <div style="font-size: 14px; color: var(--gray-color); margin-top: 5px;">${video.desc}</div>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-remove" onclick="deleteVideo(${video.id})" title="删除">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        <button class="btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="previewVideo(${video.id})">
+                            预览
+                        </button>
+                    </div>
+                `;
+                
+                videosList.appendChild(videoItem);
+            });
+        }
+        
+        // 处理图片上传
+        function handleImageUpload(event) {
+            const files = event.target.files;
+            const preview = document.getElementById('image-preview');
+            if (!preview) return;
+            
+            preview.innerHTML = '';
+            
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                const fileItem = document.createElement('div');
+                fileItem.className = 'uploaded-file';
+                
+                fileItem.innerHTML = `
+                    <div class="file-info">
+                        <div class="file-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <div>
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${formatFileSize(file.size)}</div>
+                        </div>
+                    </div>
+                    <div class="file-actions">
+                        <button class="btn-remove" onclick="this.parentElement.parentElement.remove()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                
+                preview.appendChild(fileItem);
+            }
+        }
+        
+        // 处理视频上传
+        function handleVideoUpload(event) {
+            const file = event.target.files[0];
+            const preview = document.getElementById('video-preview');
+            if (!preview) return;
+            
+            preview.innerHTML = '';
+            
+            const fileItem = document.createElement('div');
+            fileItem.className = 'uploaded-file';
+            
+            fileItem.innerHTML = `
+                <div class="file-info">
+                    <div class="file-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div>
+                        <div class="file-name">${file.name}</div>
+                        <div class="file-size">${formatFileSize(file.size)}</div>
+                    </div>
+                </div>
+                <div class="file-actions">
+                    <button class="btn-remove" onclick="this.parentElement.parentElement.remove()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            
+            preview.appendChild(fileItem);
+        }
+        
+        // 处理农场视频上传
+        function handleFarmVideoUpload(event) {
+            const file = event.target.files[0];
+            alert(`已选择视频文件: ${file.name} (${formatFileSize(file.size)})`);
+        }
+        
+        // 上传农场视频
+        function uploadFarmVideo() {
+            const title = document.getElementById('video-title').value;
+            const desc = document.getElementById('video-desc').value;
+            
+            if (!title) {
+                alert('请输入视频标题');
+                return;
+            }
+            
+            alert(`视频"${title}"上传成功！视频描述: ${desc}`);
+            document.getElementById('video-title').value = '';
+            document.getElementById('video-desc').value = '';
+            
+            // 模拟添加到视频列表
+            farmVideos.unshift({
+                id: farmVideos.length + 1,
+                title: title,
+                desc: desc,
+                date: new Date().toISOString().split('T')[0],
+                duration: '3:45'
+            });
+            
+            loadFarmVideos();
+        }
+        
+        // 格式化文件大小
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // 编辑产品
+        function editProduct(productId) {
+            alert(`编辑产品 ID: ${productId}`);
+            switchSupplierTab('upload');
+        }
+        
+        // 删除产品
+        function deleteProduct(productId) {
+            if (confirm('确定要删除这个产品吗？')) {
+                alert(`产品 ID: ${productId} 已删除`);
+                // 在实际应用中，这里应该发送删除请求到服务器
+            }
+        }
+        
+        // 删除视频
+        function deleteVideo(videoId) {
+            if (confirm('确定要删除这个视频吗？')) {
+                alert(`视频 ID: ${videoId} 已删除`);
+                // 在实际应用中，这里应该发送删除请求到服务器
+            }
+        }
+        
+        // 预览视频
+        function previewVideo(videoId) {
+            alert(`预览视频 ID: ${videoId}`);
+        }
+        
+        // 提交产品表单
+        document.getElementById('product-upload-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const productName = document.getElementById('product-name').value;
+            const productPrice = document.getElementById('product-price').value;
+            
+            alert(`产品"${productName}"上传成功！价格: ¥${productPrice}`);
+            
+            // 重置表单
+            this.reset();
+            document.getElementById('image-preview').innerHTML = '';
+            document.getElementById('video-preview').innerHTML = '';
+            
+            // 模拟添加到产品列表
+            supplierProducts.unshift({
+                id: supplierProducts.length + 1,
+                name: productName,
+                category: document.getElementById('product-category').value,
+                price: parseFloat(productPrice),
+                stock: parseInt(document.getElementById('product-stock').value),
+                origin: document.getElementById('product-origin').value,
+                desc: document.getElementById('product-desc').value,
+                hasVideo: document.getElementById('video-upload').files.length > 0,
+                certifications: []
+            });
+            
+            loadSupplierProducts();
+        });
+        
+        // 绘画设计功能
+        let canvas, ctx, isDrawing = false, lastX = 0, lastY = 0;
+        let currentColor = '#000000';
+        let currentBrushSize = 2;
+        let drawingHistory = [];
+        let historyIndex = -1;
+        
+        // 初始化画布
+        function initDrawingCanvas() {
+            canvas = document.getElementById('design-canvas');
+            if (!canvas) return;
+            
+            ctx = canvas.getContext('2d');
+            
+            // 设置画布背景为白色
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 设置绘制样式
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // 添加事件监听器
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // 触摸屏支持
+            canvas.addEventListener('touchstart', handleTouchStart);
+            canvas.addEventListener('touchmove', handleTouchMove);
+            canvas.addEventListener('touchend', stopDrawing);
+            
+            // 颜色选择
+            document.querySelectorAll('.color-option').forEach(color => {
+                color.addEventListener('click', function() {
+                    document.querySelectorAll('.color-option').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    currentColor = this.getAttribute('data-color');
+                });
+            });
+            
+            // 画笔大小选择
+            document.querySelectorAll('.brush-size').forEach(size => {
+                size.addEventListener('click', function() {
+                    document.querySelectorAll('.brush-size').forEach(s => s.classList.remove('active'));
+                    this.classList.add('active');
+                    currentBrushSize = parseInt(this.getAttribute('data-size'));
+                });
+            });
+            
+            // 保存初始状态到历史记录
+            saveToHistory();
+        }
+        
+        // 开始绘制
+        function startDrawing(e) {
+            isDrawing = true;
+            const pos = getMousePos(canvas, e);
+            [lastX, lastY] = [pos.x, pos.y];
+        }
+        
+        // 绘制过程
+        function draw(e) {
+            if (!isDrawing) return;
+            
+            const pos = getMousePos(canvas, e);
+            
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.strokeStyle = currentColor;
+            ctx.lineWidth = currentBrushSize;
+            ctx.stroke();
+            
+            [lastX, lastY] = [pos.x, pos.y];
+        }
+        
+        // 停止绘制
+        function stopDrawing() {
+            if (isDrawing) {
+                isDrawing = false;
+                saveToHistory();
+            }
+        }
+        
+        // 获取鼠标位置
+        function getMousePos(canvas, e) {
+            const rect = canvas.getBoundingClientRect();
+            let clientX, clientY;
+            
+            if (e.type.includes('touch')) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+        
+        // 触摸事件处理
+        function handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+        
+        function handleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            canvas.dispatchEvent(mouseEvent);
+        }
+        
+        // 保存到历史记录
+        function saveToHistory() {
+            // 只保存最近20步
+            if (historyIndex < drawingHistory.length - 1) {
+                drawingHistory = drawingHistory.slice(0, historyIndex + 1);
+            }
+            
+            drawingHistory.push(canvas.toDataURL());
+            historyIndex++;
+            
+            // 限制历史记录数量
+            if (drawingHistory.length > 20) {
+                drawingHistory.shift();
+                historyIndex--;
+            }
+        }
+        
+        // 清除画布
+        function clearCanvas() {
+            if (confirm('确定要清除画布上的所有内容吗？')) {
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                saveToHistory();
+            }
+        }
+        
+        // 撤销操作
+        function undoDrawing() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                const img = new Image();
+                img.onload = function() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+                };
+                img.src = drawingHistory[historyIndex];
+            }
+        }
+        
+        // 添加文字
+        function addText() {
+            const text = prompt('请输入要添加的文字:', '祝福语');
+            if (text) {
+                const fontSize = 30;
+                ctx.font = `${fontSize}px Arial`;
+                ctx.fillStyle = currentColor;
+                ctx.textAlign = 'center';
+                ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+                saveToHistory();
+            }
+        }
+        
+        // 添加贴纸
+        function addSticker() {
+            const stickers = ['❤️', '⭐', '🎁', '🌸', '🍎', '🎨', '✨', '🎉'];
+            const sticker = stickers[Math.floor(Math.random() * stickers.length)];
+            
+            ctx.font = '60px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(sticker, Math.random() * (canvas.width - 100) + 50, Math.random() * (canvas.height - 100) + 50);
+            saveToHistory();
+        }
+        
+        // 加载模板
+        function loadTemplate(template) {
+            // 清除画布
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // 根据模板添加预设设计
+            ctx.font = '40px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillStyle = '#2e7d32';
+            
+            switch(template) {
+                case 'festival':
+                    ctx.fillText('节日快乐', canvas.width / 2, 100);
+                    ctx.font = '30px Arial';
+                    ctx.fillText('礼盒设计', canvas.width / 2, 150);
+                    // 添加一些装饰
+                    ctx.fillStyle = '#ff9900';
+                    ctx.fillRect(100, 200, 600, 200);
+                    break;
+                case 'business':
+                    ctx.fillStyle = '#333333';
+                    ctx.fillText('商务礼品', canvas.width / 2, 100);
+                    ctx.font = '25px Arial';
+                    ctx.fillText('专业 • 品质 • 诚意', canvas.width / 2, 150);
+                    // 添加简约线条
+                    ctx.strokeStyle = '#333333';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.moveTo(150, 250);
+                    ctx.lineTo(650, 250);
+                    ctx.stroke();
+                    break;
+                case 'wedding':
+                    ctx.fillStyle = '#ff3366';
+                    ctx.fillText('新婚快乐', canvas.width / 2, 100);
+                    // 添加爱心
+                    ctx.font = '80px Arial';
+                    ctx.fillText('❤️', canvas.width / 2, 200);
+                    break;
+                case 'birthday':
+                    ctx.fillStyle = '#ff9900';
+                    ctx.fillText('生日快乐', canvas.width / 2, 100);
+                    // 添加蛋糕
+                    ctx.font = '80px Arial';
+                    ctx.fillText('🎂', canvas.width / 2, 200);
+                    break;
+            }
+            
+            saveToHistory();
+        }
+        
+        // 保存设计
+        function saveDesign() {
+            const designName = prompt('请输入设计名称:', '我的礼盒设计');
+            if (designName) {
+                alert(`设计"${designName}"已保存！`);
+                // 在实际应用中，这里应该将设计保存到服务器
+            }
+        }
+        
+        // 应用到礼盒
+        function applyDesignToGiftBox() {
+            alert('设计已应用到礼盒！您现在可以去定制礼盒页面查看效果。');
+            switchPage('customize');
+        }
+        
+        // 云耕种游戏功能
+        let gameCoins = 1250;
+        let todayHarvest = 12;
+        let selectedCrop = 'strawberry';
+        let cropPrices = {
+            'strawberry': 100,
+            'tomato': 80,
+            'carrot': 60,
+            'corn': 120,
+            'grape': 150,
+            'watermelon': 200
+        };
+        
+        let fieldPlots = [];
+        
+        // 初始化游戏
+        function initFarmingGame() {
+            const gameField = document.getElementById('game-field');
+            if (!gameField) return;
+            
+            gameField.innerHTML = '';
+            fieldPlots = [];
+            
+            // 创建25个地块
+            for (let i = 0; i < 25; i++) {
+                const plot = document.createElement('div');
+                plot.className = 'field-plot';
+                plot.dataset.index = i;
+                plot.dataset.state = 'empty'; // empty, planted, growing, ready
+                plot.dataset.crop = '';
+                plot.dataset.growth = 0;
+                
+                plot.innerHTML = `
+                    <div class="plot-crop"></div>
+                    <div class="plot-growth"><div class="growth-progress"></div></div>
+                `;
+                
+                plot.addEventListener('click', () => handlePlotClick(i));
+                gameField.appendChild(plot);
+                fieldPlots.push({
+                    element: plot,
+                    state: 'empty',
+                    crop: '',
+                    growth: 0,
+                    growthInterval: null
+                });
+            }
+            
+            // 作物选择
+            document.querySelectorAll('.crop-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.crop-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedCrop = this.getAttribute('data-crop');
+                });
+            });
+            
+            // 更新游戏统计
+            updateGameStats();
+            
+            // 模拟一些已种植的地块
+            simulateExistingCrops();
+        }
+        
+        // 处理地块点击
+        function handlePlotClick(index) {
+            const plot = fieldPlots[index];
+            
+            if (plot.state === 'empty') {
+                plantCropInPlot(index);
+            } else if (plot.state === 'ready') {
+                harvestCrop(index);
+            }
+        }
+        
+        // 种植作物
+        function plantCrop() {
+            const price = cropPrices[selectedCrop];
+            
+            if (gameCoins < price) {
+                alert('金币不足！请先收获作物或完成每日任务获取更多金币。');
+                return;
+            }
+            
+            // 找到空地块
+            const emptyPlots = fieldPlots.filter(plot => plot.state === 'empty');
+            if (emptyPlots.length === 0) {
+                alert('没有空地可种植了！请先收获成熟的作物。');
+                return;
+            }
+            
+            // 选择第一个空地块
+            const plotIndex = fieldPlots.findIndex(plot => plot.state === 'empty');
+            plantCropInPlot(plotIndex);
+        }
+        
+        // 在指定地块种植作物
+        function plantCropInPlot(index) {
+            const plot = fieldPlots[index];
+            const price = cropPrices[selectedCrop];
+            
+            // 扣除金币
+            gameCoins -= price;
+            updateGameStats();
+            
+            // 更新地块状态
+            plot.state = 'planted';
+            plot.crop = selectedCrop;
+            plot.growth = 10; // 初始生长进度10%
+            
+            // 更新地块显示
+            const plotElement = plot.element;
+            plotElement.classList.add('planted');
+            plotElement.dataset.state = 'planted';
+            plotElement.dataset.crop = selectedCrop;
+            plotElement.dataset.growth = '10';
+            
+            const cropIcon = getCropIcon(selectedCrop);
+            plotElement.querySelector('.plot-crop').textContent = cropIcon;
+            plotElement.querySelector('.growth-progress').style.width = '10%';
+            
+            // 开始生长计时器
+            plot.growthInterval = setInterval(() => {
+                if (plot.growth < 100) {
+                    plot.growth += 5;
+                    plotElement.dataset.growth = plot.growth;
+                    plotElement.querySelector('.growth-progress').style.width = plot.growth + '%';
+                    
+                    if (plot.growth >= 100) {
+                        plot.state = 'ready';
+                        plotElement.dataset.state = 'ready';
+                        plotElement.querySelector('.plot-crop').style.color = '#ff9900';
+                        clearInterval(plot.growthInterval);
+                    } else if (plot.growth >= 50) {
+                        plot.state = 'growing';
+                        plotElement.dataset.state = 'growing';
+                    }
+                }
+            }, 2000); // 每2秒生长5%
+        }
+        
+        // 浇水
+        function waterCrops() {
+            let wateredCount = 0;
+            
+            fieldPlots.forEach((plot, index) => {
+                if (plot.state === 'planted' || plot.state === 'growing') {
+                    // 加速生长
+                    if (plot.growth < 100) {
+                        plot.growth += 10;
+                        if (plot.growth > 100) plot.growth = 100;
+                        
+                        const plotElement = plot.element;
+                        plotElement.dataset.growth = plot.growth;
+                        plotElement.querySelector('.growth-progress').style.width = plot.growth + '%';
+                        
+                        if (plot.growth >= 100) {
+                            plot.state = 'ready';
+                            plotElement.dataset.state = 'ready';
+                            plotElement.querySelector('.plot-crop').style.color = '#ff9900';
+                            if (plot.growthInterval) clearInterval(plot.growthInterval);
+                        } else if (plot.growth >= 50) {
+                            plot.state = 'growing';
+                            plotElement.dataset.state = 'growing';
+                        }
+                        
+                        wateredCount++;
+                    }
+                }
+            });
+            
+            if (wateredCount > 0) {
+                alert(`已为 ${wateredCount} 个作物浇水，生长速度加快！`);
+            } else {
+                alert('没有需要浇水的作物。');
+            }
+        }
+        
+        // 施肥
+        function fertilizeCrops() {
+            let fertilizedCount = 0;
+            
+            fieldPlots.forEach((plot, index) => {
+                if (plot.state === 'planted' || plot.state === 'growing') {
+                    // 大幅加速生长
+                    if (plot.growth < 100) {
+                        plot.growth += 25;
+                        if (plot.growth > 100) plot.growth = 100;
+                        
+                        const plotElement = plot.element;
+                        plotElement.dataset.growth = plot.growth;
+                        plotElement.querySelector('.growth-progress').style.width = plot.growth + '%';
+                        
+                        if (plot.growth >= 100) {
+                            plot.state = 'ready';
+                            plotElement.dataset.state = 'ready';
+                            plotElement.querySelector('.plot-crop').style.color = '#ff9900';
+                            if (plot.growthInterval) clearInterval(plot.growthInterval);
+                        } else if (plot.growth >= 50) {
+                            plot.state = 'growing';
+                            plotElement.dataset.state = 'growing';
+                        }
+                        
+                        fertilizedCount++;
+                    }
+                }
+            });
+            
+            if (fertilizedCount > 0) {
+                alert(`已为 ${fertilizedCount} 个作物施肥，生长速度大幅加快！`);
+            } else {
+                alert('没有需要施肥的作物。');
+            }
+        }
+        
+        // 收获作物
+        function harvestCrop(index) {
+            const plot = fieldPlots[index];
+            
+            if (plot.state !== 'ready') {
+                alert('作物还未成熟，无法收获！');
+                return;
+            }
+            
+            // 计算收益（作物价格 * 1.5）
+            const basePrice = cropPrices[plot.crop];
+            const earnings = Math.floor(basePrice * 1.5);
+            
+            // 更新金币和收获统计
+            gameCoins += earnings;
+            todayHarvest++;
+            updateGameStats();
+            
+            // 重置地块
+            plot.state = 'empty';
+            plot.crop = '';
+            plot.growth = 0;
+            
+            const plotElement = plot.element;
+            plotElement.classList.remove('planted');
+            plotElement.dataset.state = 'empty';
+            plotElement.dataset.crop = '';
+            plotElement.dataset.growth = '0';
+            
+            plotElement.querySelector('.plot-crop').textContent = '';
+            plotElement.querySelector('.plot-crop').style.color = '';
+            plotElement.querySelector('.growth-progress').style.width = '0%';
+            
+            if (plot.growthInterval) {
+                clearInterval(plot.growthInterval);
+                plot.growthInterval = null;
+            }
+            
+            alert(`收获成功！获得 ${earnings} 金币。`);
+        }
+        
+        // 一键收获
+        function harvestAll() {
+            let harvestCount = 0;
+            let totalEarnings = 0;
+            
+            fieldPlots.forEach((plot, index) => {
+                if (plot.state === 'ready') {
+                    // 计算收益
+                    const basePrice = cropPrices[plot.crop];
+                    const earnings = Math.floor(basePrice * 1.5);
+                    totalEarnings += earnings;
+                    
+                    // 重置地块
+                    plot.state = 'empty';
+                    plot.crop = '';
+                    plot.growth = 0;
+                    
+                    const plotElement = plot.element;
+                    plotElement.classList.remove('planted');
+                    plotElement.dataset.state = 'empty';
+                    plotElement.dataset.crop = '';
+                    plotElement.dataset.growth = '0';
+                    
+                    plotElement.querySelector('.plot-crop').textContent = '';
+                    plotElement.querySelector('.plot-crop').style.color = '';
+                    plotElement.querySelector('.growth-progress').style.width = '0%';
+                    
+                    if (plot.growthInterval) {
+                        clearInterval(plot.growthInterval);
+                        plot.growthInterval = null;
+                    }
+                    
+                    harvestCount++;
+                }
+            });
+            
+            if (harvestCount > 0) {
+                gameCoins += totalEarnings;
+                todayHarvest += harvestCount;
+                updateGameStats();
+                alert(`一键收获成功！收获 ${harvestCount} 个作物，获得 ${totalEarnings} 金币。`);
+            } else {
+                alert('没有可收获的成熟作物。');
+            }
+        }
+        
+        // 兑换实物
+        function redeemCrops() {
+            if (gameCoins < 1000) {
+                alert('需要至少 1000 金币才能兑换实物农产品！');
+                return;
+            }
+            
+            if (confirm(`确定要花费 1000 金币兑换一份真实农产品吗？\n当前金币: ${gameCoins}`)) {
+                gameCoins -= 1000;
+                updateGameStats();
+                alert('兑换成功！您将收到一份随机农产品礼盒，请在3-5个工作日内注意查收。');
+            }
+        }
+        
+        // 更新游戏统计
+        function updateGameStats() {
+            document.getElementById('game-coins').textContent = gameCoins.toLocaleString();
+            document.getElementById('today-harvest').textContent = todayHarvest + '个';
+        }
+        
+        // 获取作物图标
+        function getCropIcon(crop) {
+            const icons = {
+                'strawberry': '🍓',
+                'tomato': '🍅',
+                'carrot': '🥕',
+                'corn': '🌽',
+                'grape': '🍇',
+                'watermelon': '🍉'
+            };
+            return icons[crop] || '🌱';
+        }
+        
+        // 模拟已存在的作物（用于演示）
+        function simulateExistingCrops() {
+            // 随机选择几个地块种植作物
+            const crops = ['strawberry', 'tomato', 'carrot', 'corn', 'grape', 'watermelon'];
+            
+            for (let i = 0; i < 5; i++) {
+                const randomIndex = Math.floor(Math.random() * fieldPlots.length);
+                const randomCrop = crops[Math.floor(Math.random() * crops.length)];
+                
+                if (fieldPlots[randomIndex].state === 'empty') {
+                    fieldPlots[randomIndex].state = 'growing';
+                    fieldPlots[randomIndex].crop = randomCrop;
+                    fieldPlots[randomIndex].growth = Math.floor(Math.random() * 50) + 30;
+                    
+                    const plotElement = fieldPlots[randomIndex].element;
+                    plotElement.classList.add('planted');
+                    plotElement.dataset.state = 'growing';
+                    plotElement.dataset.crop = randomCrop;
+                    plotElement.dataset.growth = fieldPlots[randomIndex].growth;
+                    
+                    plotElement.querySelector('.plot-crop').textContent = getCropIcon(randomCrop);
+                    plotElement.querySelector('.growth-progress').style.width = fieldPlots[randomIndex].growth + '%';
+                }
+            }
+            
+            // 添加一个成熟的作物
+            const matureIndex = 12; // 中间地块
+            if (fieldPlots[matureIndex].state === 'empty') {
+                fieldPlots[matureIndex].state = 'ready';
+                fieldPlots[matureIndex].crop = 'watermelon';
+                fieldPlots[matureIndex].growth = 100;
+                
+                const plotElement = fieldPlots[matureIndex].element;
+                plotElement.classList.add('planted');
+                plotElement.dataset.state = 'ready';
+                plotElement.dataset.crop = 'watermelon';
+                plotElement.dataset.growth = '100';
+                
+                plotElement.querySelector('.plot-crop').textContent = '🍉';
+                plotElement.querySelector('.plot-crop').style.color = '#ff9900';
+                plotElement.querySelector('.growth-progress').style.width = '100%';
+            }
+        }
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置首页为默认页面
+            switchPage('home');
+            
+            // 购物车点击事件
+            document.querySelector('.cart-btn').addEventListener('click', function() {
+                alert('购物车功能正在开发中...');
+            });
+            
+            // 登录按钮点击事件
+            document.querySelector('.auth-btn').addEventListener('click', function() {
+                showAuthModal();
+            });
+        });
+        
+        // 认证功能
+        let currentUser = null;
+        
+        // 显示认证模态框
+        function showAuthModal() {
+            document.getElementById('auth-modal').classList.add('active');
+            // 重新绑定事件监听器
+            bindRoleSelectionEvents();
+            bindModalCloseEvents();
+        }
+        
+        // 绑定模态框关闭事件
+        function bindModalCloseEvents() {
+            // 关闭按钮
+            document.querySelector('.modal-close').addEventListener('click', closeAuthModal);
+            // 点击模态框背景关闭
+            document.getElementById('auth-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeAuthModal();
+                }
+            });
+        }
+        
+        // 绑定角色选择事件
+        function bindRoleSelectionEvents() {
+            document.querySelectorAll('.role-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const role = this.dataset.role;
+                    
+                    // 移除其他选中状态
+                    document.querySelectorAll('.role-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // 添加当前选中状态
+                    this.classList.add('selected');
+                    
+                    // 如果选择管理者，显示登录表单
+                    if (role === 'manager') {
+                        setTimeout(() => {
+                            document.getElementById('role-selection').classList.remove('active');
+                            document.getElementById('login-form').classList.add('active');
+                        }, 300);
+                    } else {
+                        // 其他角色暂时显示开发中
+                        alert(`${this.querySelector('h4').textContent}功能正在开发中...`);
+                    }
+                });
+            });
+        }
+        
+        // 关闭认证模态框
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.remove('active');
+            // 重置表单
+            document.getElementById('role-selection').classList.add('active');
+            document.getElementById('login-form').classList.remove('active');
+            document.querySelectorAll('.role-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+        
+        // 返回角色选择
+        function backToRoleSelection() {
+            document.getElementById('role-selection').classList.add('active');
+            document.getElementById('login-form').classList.remove('active');
+            document.querySelectorAll('.role-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+        }
+        
+        // 选择角色
+        // 移除了全局事件监听器，现在在showAuthModal中绑定
+        
+        // 管理员登录
+        function loginAsManager(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // 简单的验证（实际应用中应该调用后端API）
+            if (username === 'admin' && password === 'admin123') {
+                currentUser = {
+                    role: 'manager',
+                    username: username,
+                    name: '管理员'
+                };
+                
+                // 关闭模态框
+                closeAuthModal();
+                
+                // 显示管理者界面
+                showManagerDashboard();
+                
+                // 更新UI
+                updateAuthUI();
+            } else {
+                alert('用户名或密码错误！');
+            }
+        }
+        
+        // 显示管理者界面
+        function showManagerDashboard() {
+            document.getElementById('manager-dashboard').classList.add('active');
+            // 初始化概览数据
+            initManagerOverview();
+        }
+        
+        // 退出登录
+        function logoutManager() {
+            currentUser = null;
+            document.getElementById('manager-dashboard').classList.remove('active');
+            updateAuthUI();
+        }
+        
+        // 更新认证UI
+        function updateAuthUI() {
+            const authBtn = document.querySelector('.auth-btn span');
+            if (currentUser) {
+                authBtn.textContent = `欢迎，${currentUser.name}`;
+            } else {
+                authBtn.textContent = '登录/注册';
+            }
+        }
+        
+        // 初始化管理者概览
+        function initManagerOverview() {
+            // 初始化图表（使用Chart.js，如果没有则跳过）
+            initOverviewCharts();
+            
+            // 加载数据
+            loadFarmersData();
+            loadTransportData();
+            loadOrdersData();
+        }
+        
+        // 初始化概览图表
+        function initOverviewCharts() {
+            // 检查Chart.js是否可用
+            if (typeof Chart === 'undefined') {
+                console.log('Chart.js未加载，跳过图表初始化');
+                return;
+            }
+            
+            // 订单趋势图
+            const ordersCtx = document.getElementById('orders-chart');
+            if (ordersCtx) {
+                new Chart(ordersCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                        datasets: [{
+                            label: '订单数量',
+                            data: [850, 920, 1100, 1350, 1580, 1420, 1380, 1250, 1150, 980, 780, 720],
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+            
+            // 地区分布图
+            const regionsCtx = document.getElementById('regions-chart');
+            if (regionsCtx) {
+                new Chart(regionsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['云南', '山东', '河南', '河北', '江西', '新疆', '浙江', '其他'],
+                        datasets: [{
+                            data: [28, 18, 15, 12, 10, 8, 6, 3],
+                            backgroundColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(54, 162, 235)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(153, 102, 255)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+        }
+        
+        // 切换管理者选项卡
+        function switchManagerTab(tabId) {
+            // 更新侧边栏菜单状态
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`.menu-item[onclick*="switchManagerTab('${tabId}')"]`).classList.add('active');
+            
+            // 隐藏所有选项卡内容
+            document.querySelectorAll('.manager-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示目标选项卡内容
+            document.getElementById(`manager-${tabId}`).classList.add('active');
+            
+            // 如果是数据分析选项卡，初始化分析
+            if (tabId === 'analytics') {
+                switchAnalyticsTab('farmers');
+            }
+        }
+        
+        // 加载农户数据
+        function loadFarmersData() {
+            // 模拟数据加载
+            const farmersData = [
+                { id: 'F001', name: '张三', region: '云南大理', crop: '葡萄', area: 50, score: 85 },
+                { id: 'F002', name: '李四', region: '江西赣州', crop: '脐橙', area: 30, score: 90 },
+                { id: 'F003', name: '王五', region: '山东烟台', crop: '车厘子', area: 40, score: 88 }
+            ];
+            
+            const tbody = document.getElementById('farmers-table-body');
+            tbody.innerHTML = '';
+            
+            farmersData.forEach(farmer => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${farmer.id}</td>
+                    <td>${farmer.name}</td>
+                    <td>${farmer.region}</td>
+                    <td>${farmer.crop}</td>
+                    <td>${farmer.area}亩</td>
+                    <td>${farmer.score}</td>
+                    <td>
+                        <button class="action-btn edit">编辑</button>
+                        <button class="action-btn delete">删除</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 加载运输数据
+        function loadTransportData() {
+            // 模拟数据加载
+            const transportData = [
+                { id: 'T001', route: '云南-北京', weight: 5000, cost: 8000, time: 5, method: '公路', score: 85 },
+                { id: 'T002', route: '江西-上海', weight: 3000, cost: 4500, time: 3, method: '铁路', score: 90 },
+                { id: 'T003', route: '山东-广州', weight: 4000, cost: 6000, time: 4, method: '公路', score: 88 }
+            ];
+            
+            const tbody = document.getElementById('transport-table-body');
+            tbody.innerHTML = '';
+            
+            transportData.forEach(transport => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transport.id}</td>
+                    <td>${transport.route}</td>
+                    <td>${transport.weight}kg</td>
+                    <td>¥${transport.cost}</td>
+                    <td>${transport.time}天</td>
+                    <td>${transport.method}</td>
+                    <td>${transport.score}</td>
+                    <td>
+                        <button class="action-btn edit">编辑</button>
+                        <button class="action-btn delete">删除</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 加载订单数据
+        function loadOrdersData() {
+            // 模拟数据加载
+            const ordersData = [
+                { id: 'ORD001', customer: '客户A', product: '精品礼盒', amount: 298, status: '已完成', time: '2024-01-15' },
+                { id: 'ORD002', customer: '客户B', product: '水果礼盒', amount: 158, status: '进行中', time: '2024-01-16' },
+                { id: 'ORD003', customer: '客户C', product: '茶叶礼盒', amount: 388, status: '待发货', time: '2024-01-17' }
+            ];
+            
+            const tbody = document.getElementById('orders-table-body');
+            tbody.innerHTML = '';
+            
+            ordersData.forEach(order => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${order.id}</td>
+                    <td>${order.customer}</td>
+                    <td>${order.product}</td>
+                    <td>¥${order.amount}</td>
+                    <td><span class="status-${order.status.toLowerCase().replace(' ', '-')}">${order.status}</span></td>
+                    <td>${order.time}</td>
+                    <td>
+                        <button class="action-btn edit">查看</button>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // 数据分析功能
+        // 切换分析选项卡
+        function switchAnalyticsTab(tabId) {
+            // 隐藏所有分析面板
+            document.querySelectorAll('.analytics-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // 显示目标分析面板
+            document.getElementById(`analytics-${tabId}`).classList.add('active');
+            
+            // 更新选项卡状态
+            document.querySelectorAll('.analytics-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`.analytics-tab[onclick*="switchAnalyticsTab('${tabId}')"]`).classList.add('active');
+            
+            // 自动加载图片
+            loadAnalyticsImage(tabId);
+        }
+        
+        // 加载分析图片
+        function loadAnalyticsImage(type) {
+            const chartContainer = document.querySelector(`#analytics-${type} .analytics-chart`);
+            if (!chartContainer) {
+                console.error(`找不到图表容器: #analytics-${type} .analytics-chart`);
+                return;
+            }
+            
+            // 显示加载状态
+            chartContainer.innerHTML = `
+                <div class="analytics-loading">
+                    <i class="fas fa-chart-bar"></i>
+                    <p>正在生成分析图表...</p>
+                </div>
+            `;
+            
+            // 构建API URL
+            const apiUrl = `http://localhost:5000/api/analysis/${type}`;
+            
+            // 创建图片元素
+            const img = new Image();
+            img.onload = function() {
+                chartContainer.innerHTML = '';
+                chartContainer.appendChild(img);
+                img.id = `${type}-chart`;
+                img.src = apiUrl;
+                img.alt = `${type}分析图表`;
+                img.style.maxWidth = '100%';
+                img.style.height = 'auto';
+                img.style.borderRadius = '8px';
+                img.style.boxShadow = 'var(--shadow)';
+            };
+            
+            img.onerror = function() {
+                chartContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--gray-color);">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 48px; margin-bottom: 20px;"></i>
+                        <p>无法加载分析图表</p>
+                        <p style="font-size: 14px; margin-top: 10px;">请确保后端服务正在运行</p>
+                        <button class="btn btn-primary" onclick="loadAnalyticsImage('${type}')" style="margin-top: 20px;">
+                            <i class="fas fa-sync-alt"></i> 重试
+                        </button>
+                    </div>
+                `;
+            };
+            
+            // 设置图片源
+            img.src = apiUrl;
+        }
+        
+        // 下载分析图片
+        function downloadAnalyticsImage(type) {
+            const imgElement = document.getElementById(`${type}-chart`);
+            if (!imgElement || !imgElement.src) {
+                alert('请先加载分析图表');
+                return;
+            }
+            
+            // 创建下载链接
+            const link = document.createElement('a');
+            link.href = imgElement.src;
+            link.download = `${type}-analysis-${new Date().toISOString().split('T')[0]}.png`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
